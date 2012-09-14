@@ -15,15 +15,17 @@ function addTask(){
     var message = '';
 
     if(task.value){
-        tasks[tasks.length] = task;
+        tasks.push(task.value);
 
-        message = 'You have ' + tasks.length + ' task(s) in your to-do list.';
+        message = '<h2>To-Do</h2><ol>';
 
-        if(output.textContent !== undefined){
-            output.textContent = message;
-        }else{
-            output.innerText = message;
+        for(var i = 0, count = tasks.length; i < count; i++){
+            message += '<li>' + tasks[i] + '</li>';
         }
+
+        message += '</ol>';
+
+        output.innerHTML = message;
     }
 
     return false;
