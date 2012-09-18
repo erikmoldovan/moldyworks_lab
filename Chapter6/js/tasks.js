@@ -27,7 +27,6 @@ function addTask(){
 
         output.innerHTML = message;
     }
-
     return false;
 }
 

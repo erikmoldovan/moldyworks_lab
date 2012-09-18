@@ -1,0 +1,41 @@
+.name{
+    font-weight: bold;
+    font-size: 2em;
+}
+
+.price{
+    color: green;
+}
+
+.description{
+    font-style: italic;
+}
+
+.item{
+    border: 2px solid black;
+    border-radius: 10px;
+    width: 100px;
+    margin: 2px;
+    padding: 5px;
+    float: left;
+}
+
+#shoppingCart{
+    float: left;
+    clear: left;
+    margin-top: 20px;
+    border: 1px dashed rgb(200, 200, 50);
+    min-width: 200px;
+    min-height: 100px;
+}
+
+#cart{
+    text-align: center;
+    border-bottom: 1px solid rgba(127,127,127,0.5);
+    padding: 0px 5px;
+}
+
+.remove{
+    margin-left: 10px;
+    color: red;
+}
