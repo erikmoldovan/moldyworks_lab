@@ -26,7 +26,7 @@
     margin-top: 20px;
     border: 1px dashed rgb(200, 200, 50);
     min-width: 200px;
-    min-height: 100px;
+    min-height: 60px;
 }
 
 #cart{
@@ -38,4 +38,13 @@
 .remove{
     margin-left: 10px;
     color: red;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+#totalPrice{
+    float: right;
+    margin-right: 16px
 }

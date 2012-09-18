@@ -1,40 +1,4 @@
-var cart = {
-    contents: [],
-
-    addItem: function(newItem, quantity){
-        var code = '';
-        var that = this;
-        var price, name;
-
-        for(i = 0; i < quantity; i++){
-            if(quantity <= 0){break;}
-
-            this.contents.push(newItem);
-            newItem.quantity--;
-
-            var output = document.getElementById('cartList');
-            code = '';
-            price = parseInt(newItem.price.toFixed(2));
-            name = newItem.name;
-
-            code += '<li class="cart-' + newItem.id + '">Name: ' + name + ' Price: $' + price + '<input class="remove"' + 'id="rembutton' + newItem.id + '" type="button" value="X"/></li>';
-
-            output.innerHTML = output.innerHTML + code;
-        }
-        $('.remove').unbind().click(deleteItem);
-    },
-
-    removeItem: function(oldItemID){
-        for(i= 0; i < this.contents.length; i++){
-            if($('li.cart-' + oldItemID + ':eq(0)')){
-                $('li.cart-' + oldItemID + ':eq(0)').remove();
-                this.contents.pop(i);
-                break;
-            }
-        }
-    }
-};
-
+// Variable and Object Declaration
 var items = [];
 
 var item = function(obj){$.extend(this, obj)
@@ -63,7 +27,72 @@ items.push(new item({
     description: 'College',
     quantity: 4}));
 
+// The cart object/function... method? Controls logic for adding items to the cart, removing them, and calculating the total price.
+var cart = {
+    contents: [],
+
+    addItem: function(newItem, quantity){
+        var code = '';
+        var that = this;
+        var price, name;
+
+        for(i = 0; i < quantity; i++){
+            if(newItem.quantity <= 0){
+                break;
+            }
+
+            this.contents.push(newItem);
+            newItem.quantity--;
+
+            var output = document.getElementById('cartList');
+            code = '';
+            price = parseInt(newItem.price.toFixed(2));
+            name = newItem.name;
+
+            code += '<li class="cart-' + newItem.id + '"><span class="bold">Name:</span> ' + name + ' <span class="bold">Price:</span> $' + price + '<input class="remove"' + 'id="rembutton' + newItem.id + '" type="button" value="X"/></li>';
+
+            output.innerHTML = output.innerHTML + code;
+            this.calculateTotal();
+        }
+        $('.remove').unbind().click(deleteItem);
+    },
+
+    removeItem: function(oldItemID){
+        for(i= 0; i < this.contents.length; i++){
+            if($('li.cart-' + oldItemID + ':eq(0)')){
+                $('li.cart-' + oldItemID + ':eq(0)').remove();
+                this.contents.pop(i);
+
+                // Ups the quantity by one for the removed item in the main items array
+                for(x = 0; x < items.length; x++){
+                    if(parseInt(items[x].id) == oldItemID){
+                        items[x].quantity += 1;
+                        break;
+                    }
+                }
+
+                this.calculateTotal();
+                break;
+            }
+        }
+    },
+
+    calculateTotal: function(){
+        var total = 0;
+        var output = document.getElementById('total');
+
+        for(i = 0; i < this.contents.length; i++){
+            total += parseInt(this.contents[i].price);
+        }
+
+        output.innerHTML = '<span id="totalPrice"><span class="bold">Total:</span> $' + total.toFixed(2) + '</span>';
+    }
+};
+
+// The initialization method. Runs on window load, thanks to statement at the bottom of the script
 function init(){
+    cart.calculateTotal();
+
     var output = document.getElementById('items');
     var code = '';
 
@@ -81,6 +110,7 @@ function init(){
 
     $('.buy').click(buyItem);
 }
+
 
 var buyItem = function(e){
     cart.addItem(items[parseInt(e.target.id.substr(7))], 1);
