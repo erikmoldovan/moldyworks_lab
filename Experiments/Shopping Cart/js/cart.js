@@ -111,7 +111,6 @@ function init(){
     $('.buy').click(buyItem);
 }
 
-
 var buyItem = function(e){
     cart.addItem(items[parseInt(e.target.id.substr(7))], 1);
 }
