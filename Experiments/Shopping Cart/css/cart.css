@@ -1,3 +1,30 @@
+#siteHeader{
+    font-weight: bold;
+    font-size: 2em;
+    color: orange;
+}
+
+#search{
+    padding-bottom: 20px;
+    min-height: 20px;
+}
+
+#searchContainer{
+    float: left;
+    clear: left;
+}
+
+.item{
+    border: 2px solid black;
+    border-radius: 10px;
+    width: 100px;
+    margin: 2px;
+    padding: 5px;
+    float: left;
+    min-width: 300px;
+    min-height:550px;
+}
+
 .name{
     font-weight: bold;
     font-size: 2em;
@@ -9,15 +36,13 @@
 
 .description{
     font-style: italic;
+    font-size:0.9em;
 }
 
-.item{
-    border: 2px solid black;
-    border-radius: 10px;
-    width: 100px;
-    margin: 2px;
-    padding: 5px;
+#buy{
     float: left;
+    position: fixed;
+
 }
 
 #shoppingCart{
