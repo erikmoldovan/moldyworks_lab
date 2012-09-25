@@ -39,10 +39,8 @@
     font-size:0.9em;
 }
 
-#buy{
-    float: left;
-    position: fixed;
-
+.buyContainer{
+    float: right;
 }
 
 #shoppingCart{

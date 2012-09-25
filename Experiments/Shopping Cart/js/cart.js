@@ -28,7 +28,7 @@ var items = {catalog:[],
         code += '<div class="author">' + currentItem.author + '</div>';
         code += '<div class="description">' + currentItem.description + '</div>';
         code += '<div class="image"><img src="' + currentItem.image + '"/></div>';
-        code += '<input class="buy" id="button-' + currentItem.id + '" type="button" value="Buy"/>';
+        code += '<div class="buyContainer"><input class="buy" id="button-' + currentItem.id + '" type="button" value="Buy"/></div>';
         code += '</div>';
 
         return code;
@@ -173,7 +173,6 @@ function init() {
 }
 
 var buyItem = function (e) {
-    console.log(e.target.id.substr(7));
     cart.addItem(items.catalog[parseInt(e.target.id.substr(7))], 1);
 }
 
@@ -183,4 +182,3 @@ var deleteItem = function (e) {
 
 //window.onload = init;
 $(document).ready(function(){init();
-console.log($('body'),$(document.getElementsByTagName('body')[0]));});
