@@ -22,14 +22,12 @@ $(document).ready(function(){
                 iterator = 0;
                 output.innerText = '';
                 loop();
-                console.log('interval');
             }, 2000);
             console.log('if');
         }else{
             setTimeout(function() {
                 loop();
             }, 300);
-            console.log('else');
         }
     }
 

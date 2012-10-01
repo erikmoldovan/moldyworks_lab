@@ -5,74 +5,104 @@
  * Time: 1:16 PM
  * To change this template use File | Settings | File Templates.
  */
+
+// This object contains functions for all the mathematical operations used
 var calculate = {
-    addition:function(val1, val2){
-        return val1 + val2;
-    },
-
-    subtraction:function(val1, val2){
-        return val1 - val2;
-    },
-
-    multiplication:function(val1, val2){
-        return val1 * val2;
-    },
-
-    division:function(val1, val2){
-        return val1 / val2;
-    },
-
-    modulus:function(val1, val2){
-        return val1 % val2;
-    }
+    addition:function(val1, val2){return val1 + val2;},
+    subtraction:function(val1, val2){return val1 - val2;},
+    multiplication:function(val1, val2){return val1 * val2;},
+    division:function(val1, val2){return val1 / val2;},
+    percent:function(val1, val2){return val1 % val2;}
 };
 
+// This object handles the display and click handlers for the calculator
 var calcDisplay = {
 
-    actBtnPressed:false,
-    actBtnJustPressed:false,
+    // Initializes necessary variables to null or equivalent
+    opBtnPressed:false,
+    opBtnJustPressed:false,
     eqJustPressed:false,
     firstNum:null,
     secNum:null,
     operation:null,
+    memNum:null,
+    memBtnPressed:false,
 
+    // Processes click events and routes them to appropriate function based on the value of the button pressed
     initClickHandlers:function(){
+
+        // Loops through all numbers in an array to determine which number has been clicked
         for(i = 0; i < this.numBtns.length; i++){
             this.numBtns[i].onclick = this.numClick;
         }
 
+        // Loops through all operators in the opBtns object to determine which operator key has been clicked
         var that = this;
-        $.each(this.actBtns, function(i){
-            this.onclick = that.atnClick;
+        $.each(this.opBtns, function(i){
+            this.onclick = that.opClick;
         });
 
-        this.clrBtn.onclick = this.clear;
-        this.eqBtn.onclick = this.process;
+        // Loops through all the actions in the actnBtns object to determine which action key has been clicked
+        $.each(this.actnBtns, function(i){
+            this.onclick = that.actnClick;
+        });
+
+        // Controls fading effect of display when buttons are pressed
+        $('div.btn').click(function(){
+            $('div#displayArea').fadeOut(50, function(){$('div#displayArea').fadeIn(50);});
+        });
     },
 
-    atnClick:function(e){
+    // Processes the number click event
+    numClick:function(e){
 
+        calcDisplay.outputOverflow.innerText = '';
+
+        // If an action button was just pressed, start a new number on the display
+        if(calcDisplay.opBtnJustPressed){
+            calcDisplay.outputDisplay.innerText = '';
+        }
+
+        // Failsafe, in case a higher number is introduced (somehow)
+        if(calcDisplay.outputDisplay.innerText.length >= 9){
+            return;
+        }
+
+        // Appends new number to end of current number displayed
+        calcDisplay.outputDisplay.innerText += e.target.innerText;
+        calcDisplay.opBtnJustPressed = false;
+    },
+
+    // This function covers all operations performed by the calculator
+    opClick:function(e){
+
+        calcDisplay.outputOverflow.innerText = '';
+
+        // Gets the value of the div clicked, for sorting purposes
         var clickVal = e.target.innerText;
-        calcDisplay.actBtnJustPressed = true;
+        calcDisplay.opBtnJustPressed = true;
 
+        // Transfers the click event to the parent div if a user clicks on the span instead
         if(e.target.tagName == "SPAN"){
             clickVal = $(e.target).parent()[0].innerText;
         }
 
-        if(calcDisplay.actBtnPressed && !calcDisplay.eqJustPressed){
+        // Switches display in case of operation indecision before entering second number (i.e., hitting + after -)
+        if(calcDisplay.opBtnPressed && !calcDisplay.eqJustPressed){
             calcDisplay.outputDisplay.innerText = calcDisplay.outputDisplay.innerText.slice(0, -1);
         }else{
             calcDisplay.secNum = null;
         }
 
+        // Sets necessary values
         calcDisplay.eqJustPressed = false;
         calcDisplay.operation = clickVal;
         calcDisplay.firstNum = parseFloat(calcDisplay.outputDisplay.innerText);
-        console.log(calcDisplay.firstNum);
 
-        calcDisplay.actBtnPressed = true;
+        calcDisplay.opBtnPressed = true;
         calcDisplay.outputDisplay.innerText += clickVal;
 
+        // Routing statement to perform actual operation
         switch(clickVal){
             case '+':
                 calcDisplay.operation = calculate.addition;
@@ -87,68 +117,103 @@ var calcDisplay = {
                 calcDisplay.operation = calculate.division;
                 break;
             case '%':
-                calcDisplay.operation = calculate.modulus;
+                calcDisplay.operation = calculate.percent;
                 break;
         }
     },
 
-    numClick:function(e){
-        if(calcDisplay.actBtnJustPressed){
-            calcDisplay.outputDisplay.innerText = '';
+    // This function covers non-operational action buttons on the calculator
+    actnClick:function(e){
+
+        var clickVal = e.target.innerText;
+
+        // Routing statement for the action buttons
+        switch(clickVal){
+            case 'MR': // Memory Recall
+                calcDisplay.outputDisplay.innerText = calcDisplay.memNum;
+                calcDisplay.outputOverflow.innerText = "MR";
+                break;
+            case 'M+': //
+                calcDisplay.memNum += parseFloat(calcDisplay.outputDisplay.innerText);
+                calcDisplay.outputOverflow.innerText = 'M+';
+                console.log(calcDisplay.memNum);
+                break;
+            case 'M-':
+                calcDisplay.memNum -= parseFloat(calcDisplay.outputDisplay.innerText);
+                calcDisplay.outputOverflow.innerText = 'M-';
+                console.log(calcDisplay.memNum);
+                break;
+            case 'MC':
+                calcDisplay.memNum = null;
+                calcDisplay.outputOverflow.innerText = 'MC';
+                console.log(calcDisplay.memNum);
+                break;
+            case 'C':
+                calcDisplay.outputDisplay.innerText = '';
+                calcDisplay.outputOverflow.innerText = '';
+                calcDisplay.opBtnPressed = false;
+                calcDisplay.firstNum = null;
+                calcDisplay.secNum = null;
+                calcDisplay.operation = null;
+                calcDisplay.eqJustPressed = false;
+                break;
+            case '=':
+                calcDisplay.process();
+                break;
         }
-
-        if(calcDisplay.outputDisplay.innerText.length >= 9){
-            return;
-        }
-
-        calcDisplay.outputDisplay.innerText += e.target.innerText;
-
-
-        calcDisplay.actBtnJustPressed = false;
     },
 
-    clear:function(){
-        calcDisplay.outputDisplay.innerText = '';
-        calcDisplay.outputOverflow.innerText = '';
-        calcDisplay.actBtnPressed = false;
-        calcDisplay.firstNum = null;
-        calcDisplay.secNum = null;
-        calcDisplay.operation = null;
-        calcDisplay.eqJustPressed = false;
-    },
-
+    // This function processes the equation, and runs when the equals button has been pressed
     process:function(){
+
+        // Sets the second number to what's already displayed, if no second number has been set.
+        // In effect, 6 + = is 6 + 6 =
         if(calcDisplay.secNum === null){
             calcDisplay.secNum = parseFloat(calcDisplay.outputDisplay.innerText);
         }
 
-        var returnVal = calcDisplay.operation(calcDisplay.firstNum, calcDisplay.secNum);
-        console.log(returnVal);
-        console.log(returnVal.length);
-        if(returnVal.length < 9){
-            returnVal = returnVal.toPrecision(returnVal.length);
-            console.log('true : ' + returnVal);
-        }else{
-            returnVal = returnVal.toPrecision(9);
+        // Same as above, but reverse. + 6 = is 0 + 6 =
+        if(isNaN(calcDisplay.firstNum)){
+            calcDisplay.firstNum = 0;
         }
 
-        if(returnVal.indexOf('e') != -1){
-            calcDisplay.outputOverflow.innerText = returnVal.substring(returnVal.indexOf('e'));
-            returnVal = returnVal.substring(0, returnVal.indexOf('e'));
-        }
+        var returnVal;
 
-        calcDisplay.firstNum = returnVal;
-        calcDisplay.outputDisplay.innerText = returnVal;
+        try{
+            returnVal = parseFloat(calcDisplay.operation(calcDisplay.firstNum, calcDisplay.secNum));
+
+            if(returnVal >= 999999999){
+                returnVal = returnVal.toPrecision(returnVal.length);
+                console.log('true ' + returnVal + ' ' + returnVal.length);
+            }else{
+                returnVal = returnVal.toPrecision(8);
+                console.log('false ' + returnVal + ' ' + returnVal.length);
+            }
+
+            // In case the answer goes into exponents, substring out the E part and display it in the overflow section
+            if(returnVal.indexOf('e') != -1){
+                calcDisplay.outputOverflow.innerText = returnVal.substring(returnVal.indexOf('e'));
+                returnVal = returnVal.substring(0, returnVal.indexOf('e'));
+            }
+
+            calcDisplay.outputDisplay.innerText = returnVal;
+            calcDisplay.firstNum = returnVal;
+        }
+        catch(err){
+            calcDisplay.firstNum = parseFloat(calcDisplay.outputDisplay.innerText);
+            returnVal = calcDisplay.firstNum;
+            console.error('Invalid operation');
+        }
 
         calcDisplay.eqJustPressed = true;
     }
 };
 
 function init(){
-    //noinspection JSValidateTypes
+    // This extends the calcDiaplay object, by initializing variables associated with the DOM before any functions are run
     $.extend(calcDisplay, {
 
-        actBtns:{
+        opBtns:{
             modBtn:document.getElementById('buttonmodulus'),
             divBtn:document.getElementById('buttondivide'),
             mulBtn:document.getElementById('buttonmultiply'),
@@ -156,14 +221,21 @@ function init(){
             addBtn:document.getElementById('buttonadd')
         },
 
-        clrBtn:document.getElementById('buttonclear'),
-        eqBtn:document.getElementById('buttonequals'),
+        actnBtns:{
+            clrBtn:document.getElementById('buttonclear'),
+            eqBtn:document.getElementById('buttonequals'),
+            mrecallBtn:document.getElementById('buttonMR'),
+            mclearBtn:document.getElementById('buttonMC'),
+            maddBtn:document.getElementById('buttonMA'),
+            msubBtn:document.getElementById('buttonMS')
+        },
 
         numBtns:document.getElementsByClassName('numBtn'),
         outputDisplay:document.getElementById('displayArea'),
         outputOverflow:document.getElementById('displayOverflow')});
 
+    $('div#calcBody').draggable({cancel:"a"});
     calcDisplay.initClickHandlers();
 }
 
-window.onload = init;
+$(document).ready(function(){init()});

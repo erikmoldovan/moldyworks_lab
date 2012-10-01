@@ -6,13 +6,18 @@
 #calcBody {
     border: 3px solid black;
     border-radius: 10px;
-    height: 390px;
+    height: 450px;
     width: 260px;
     background-color: #CCCCCC;
     background-image:-webkit-linear-gradient(-53deg,rgba(255, 255, 255, .3) 0% , rgba(255, 255, 255, .5) 50% , transparent 98%, transparent 100% ),-webkit-linear-gradient(#DDD 0%, #AAA 90%);
     -moz-box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.5);
     -webkit-box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.5);
     box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.5);
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 #displayField {
@@ -38,8 +43,8 @@
     font-family:"digital7";
     text-align: right;
     position:absolute;
-    top:71px;
-    left:234px;
+    top:61px;
+    left:224px;
 }
 
 #buttonDrawArea {

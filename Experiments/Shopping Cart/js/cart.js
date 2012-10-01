@@ -181,4 +181,4 @@ var deleteItem = function (e) {
 }
 
 //window.onload = init;
-$(document).ready(function(){init();
+$(document).ready(function(){init()});
