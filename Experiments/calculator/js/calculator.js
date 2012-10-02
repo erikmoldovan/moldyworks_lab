@@ -180,14 +180,13 @@ var calcDisplay = {
         var returnVal;
 
         try{
-            returnVal = parseFloat(calcDisplay.operation(calcDisplay.firstNum, calcDisplay.secNum));
+            returnVal = calcDisplay.operation(calcDisplay.firstNum, calcDisplay.secNum);
+            var nLength = returnVal.toString().length;
 
-            if(returnVal >= 999999999){
-                returnVal = returnVal.toPrecision(returnVal.length);
-                console.log('true ' + returnVal + ' ' + returnVal.length);
+            if(returnVal <= 99999999 && nLength <= 7){
+                returnVal = returnVal.toPrecision(nLength);
             }else{
-                returnVal = returnVal.toPrecision(8);
-                console.log('false ' + returnVal + ' ' + returnVal.length);
+                returnVal = returnVal.toPrecision(6);
             }
 
             // In case the answer goes into exponents, substring out the E part and display it in the overflow section
