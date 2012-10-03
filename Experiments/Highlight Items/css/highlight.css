@@ -1,0 +1,125 @@
+div#boot {
+    background-image:url('long_fall_boot.jpg');
+    width:800px;
+    height:879px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.list {
+    position:relative;
+    top:109px;
+    left:63px;
+}
+
+#list1 {
+    width:198px;
+    height:20px;
+}
+
+#list2 {
+    width:75px;
+    height:20px;
+}
+
+#list3 {
+    width:75px;
+    height:21px;
+}
+
+#list4 {
+    width:75px;
+    height:21px;
+}
+
+#list5 {
+    width:92px;
+    height:21px;
+}
+
+#list6 {
+    width:81px;
+    height:22px;
+}
+
+#list7 {
+    width:117px;
+    height:21px;
+}
+
+#list8 {
+    width:124px;
+    height:22px;
+}
+
+#list9 {
+    width:183px;
+    height:21px;
+}
+
+.part {
+    position:relative;
+}
+
+#part1 {
+    left:297px;
+    top:168px;
+    width:175px;
+    height:483px;
+}
+
+#part2 {
+      left:710px;
+      bottom:33px;
+      width:60px;
+      height:69px;
+}
+
+#part3 {
+    left: 661px;
+    bottom: 137px;
+    width: 57px;
+    height: 56px;
+}
+
+#part4 {
+    left: 525px;
+    bottom: 242px;
+    width: 61px;
+    height: 157px;
+}
+
+#part5 {
+    left: 564px;
+    bottom: 241px;
+    width: 43px;
+    height: 94px;
+}
+
+#part6 {
+    left: 473px;
+    bottom: 474px;
+    width: 66px;
+    height: 103px;
+}
+
+#part7 {
+    left:611px;
+    bottom:716px;
+    width:52px;
+    height:128px;
+}
+
+#part8 {
+    left:489px;
+    bottom:850px;
+    width:48px;
+    height:181px;
+}
+
+#part9 {
+    left: 569px;
+    bottom: 904px;
+    width: 104px;
+    height: 71px;
+}
