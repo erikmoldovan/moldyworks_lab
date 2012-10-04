@@ -6,21 +6,52 @@
  * To change this template use File | Settings | File Templates.
  */
 
+(function($){
+    $.fn.doTransition = function(){
+        this.addClass('light');
+        this.css('opacity', .8);
+        this.animate({opacity: .2}, 400);
+    };
+
+    $.fn.removeTransition = function(){
+        this.removeClass('light');
+    };
+
+    $.fn.hoverbox = function(){
+        var element = $(this);
+        var hoverBox = $('#hoverBox');
+
+        function showHover(e){
+            hoverBox.css({top: e.pageY, left: e.pageX + 10});
+            console.log(hoverBox.position().left , hoverBox.position().top);
+            console.log(e.pageX , e.pageY);
+            hoverBox.show();
+        }
+
+         function hideHover(){
+            hoverBox.hide();
+        }
+
+        element.hover(function(e){
+                console.log(e.pageX , e.pageY);
+                linkedDiv = $('#part' + this.id.slice(-1));
+
+                $(this).doTransition();
+                linkedDiv.doTransition();
+                showHover(e);
+            },
+            function(){
+                $(this).removeTransition();
+                linkedDiv.removeTransition();
+                hideHover();
+        })
+    }
+})(jQuery);
+
 function sympatheticHover(){
     var linkedDiv;
-
-    $("div.list").hover(
-        function(){
-            var highlight = {'border' : '1px black solid','background-color' : 'red', 'opacity' : '0.3', 'transition' : 'opacity 0.5s', 'box-shadow' : '3px 3px 4px black'};
-            $(this).css(highlight);
-            linkedDiv = 'part' + this.id.slice(-1);
-            $('div#' + linkedDiv).css(highlight);
-        },
-        function(){
-            var unlight = {'border' : '','background-color' : '', 'opacity' : '1.0', 'box-shadow' : ''};
-            $(this).css(unlight);
-            $('div#' + linkedDiv).css(unlight);
-    })
+    var hoverBox;
+    $('.list').hoverbox(this);
 }
 
 function init(){

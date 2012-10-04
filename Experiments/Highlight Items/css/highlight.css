@@ -8,8 +8,9 @@ div#boot {
 
 .list {
     position:relative;
-    top:109px;
+    top:107px;
     left:63px;
+    opacity:1;
 }
 
 #list1 {
@@ -19,12 +20,12 @@ div#boot {
 
 #list2 {
     width:75px;
-    height:20px;
+    height:22px;
 }
 
 #list3 {
     width:75px;
-    height:21px;
+    height:20px;
 }
 
 #list4 {
@@ -49,7 +50,7 @@ div#boot {
 
 #list8 {
     width:124px;
-    height:22px;
+    height:21px;
 }
 
 #list9 {
@@ -59,6 +60,7 @@ div#boot {
 
 .part {
     position:relative;
+    opacity:1;
 }
 
 #part1 {
@@ -122,4 +124,20 @@ div#boot {
     bottom: 904px;
     width: 104px;
     height: 71px;
+}
+
+.light {
+    border:1px black solid;
+    background-color:red;
+    box-shadow:3px 3px 4px black;
+}
+
+#hoverBox {
+    position:absolute;
+    width:100px;
+    height:50px;
+    background-color:white;
+    border:1px black solid;
+    opacity:0.8;
+    display:none;
 }
