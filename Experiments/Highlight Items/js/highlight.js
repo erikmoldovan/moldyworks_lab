@@ -7,51 +7,51 @@
  */
 
 (function($){
-    $.fn.doTransition = function(){
-        this.addClass('light');
-        this.css('opacity', .8);
-        this.animate({opacity: .2}, 400);
-    };
-
-    $.fn.removeTransition = function(){
-        this.removeClass('light');
-    };
-
     $.fn.hoverbox = function(){
         var element = $(this);
         var hoverBox = $('#hoverBox');
+        var linkedDiv;
 
         function showHover(e){
             hoverBox.css({top: e.pageY, left: e.pageX + 10});
-            console.log(hoverBox.position().left , hoverBox.position().top);
-            console.log(e.pageX , e.pageY);
+            hoverBox.text(element.attr('data-message'));
             hoverBox.show();
         }
 
-         function hideHover(){
+        function hideHover(){
             hoverBox.hide();
         }
 
-        element.hover(function(e){
-                console.log(e.pageX , e.pageY);
+        function doTransition(dElement){
+            dElement.addClass('light');
+            dElement.css('opacity', .8);
+            dElement.animate({opacity: .2}, 400);
+        }
+
+        function removeTransition(dElement){
+            dElement.removeClass('light');
+        }
+
+        element.hover(
+            function(e){
                 linkedDiv = $('#part' + this.id.slice(-1));
 
-                $(this).doTransition();
-                linkedDiv.doTransition();
+                doTransition($(this));
+                doTransition(linkedDiv);
                 showHover(e);
             },
             function(){
-                $(this).removeTransition();
-                linkedDiv.removeTransition();
+                removeTransition($(this));
+                removeTransition(linkedDiv);
                 hideHover();
         })
     }
 })(jQuery);
 
 function sympatheticHover(){
-    var linkedDiv;
-    var hoverBox;
-    $('.list').hoverbox(this);
+    $.each($('.list'), function(){
+        $(this).hoverbox(this)
+        });
 }
 
 function init(){

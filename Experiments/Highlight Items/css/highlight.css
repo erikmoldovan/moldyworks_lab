@@ -140,4 +140,5 @@ div#boot {
     border:1px black solid;
     opacity:0.8;
     display:none;
+    text-align:center;
 }
