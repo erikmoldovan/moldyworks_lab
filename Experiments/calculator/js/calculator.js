@@ -241,8 +241,11 @@ function init(){
         outputOverflow:document.getElementById('displayOverflow')});
 
     $('div#calcBody').draggable({cancel:"a"});
-    window.scrollTo(0, 1);
     calcDisplay.initClickHandlers();
+
+    setTimeout(function(){
+        window.scrollTo(0, 1);
+    }, 1000);
 }
 
 $(document).ready(function(){init()});
