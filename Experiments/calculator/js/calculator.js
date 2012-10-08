@@ -184,7 +184,11 @@ var calcDisplay = {
             var nLength = returnVal.toString().length;
 
             if(returnVal <= 99999999 && nLength <= 7){
-                returnVal = returnVal.toPrecision(nLength-1);
+                if(nLength = 3){
+                    returnVal = returnVal.toPrecision(nLength);
+                }else{
+                    returnVal = returnVal.toPrecision(nLength-1);
+                }
             }else{
                 returnVal = returnVal.toPrecision(6);
             }
