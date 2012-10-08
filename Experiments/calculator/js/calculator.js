@@ -53,8 +53,43 @@ var calcDisplay = {
         });
     },
 
+    initKeyHandlers:function(){
+        $(document).keypress(function(e){
+            var keyPressed = e.charCode || e.keyCode;
+            console.log(keyPressed);
+
+            if(keyPressed >= 48 && keyPressed <= 57){
+                calcDisplay.numClick(e, (keyPressed - 48));
+            }else{
+                switch(keyPressed){
+                    case 37:
+                        calcDisplay.opClick(e, '%');
+                        return;
+                    case 42:
+                        calcDisplay.opClick(e, '*');
+                        return;
+                    case 43:
+                        calcDisplay.opClick(e, '+');
+                        return;
+                    case 45:
+                        calcDisplay.opClick(e, '-');
+                        return;
+                    case 46:
+                        calcDisplay.numClick(e, '.');
+                        return;
+                    case 47:
+                        calcDisplay.opClick(e, '/');
+                        return;
+                    case 61:
+                        calcDisplay.actnClick(e, '=');
+                        return;
+                }
+            }
+        })
+    },
+
     // Processes the number click event
-    numClick:function(e){
+    numClick:function(e, keyValue){
 
         calcDisplay.outputOverflow.innerText = '';
 
@@ -68,18 +103,25 @@ var calcDisplay = {
             return;
         }
 
+        if(keyValue){
+            calcDisplay.outputDisplay.innerText += (keyValue);
+            calcDisplay.opBtnJustPressed = false;
+
+            return;
+        }
+
         // Appends new number to end of current number displayed
         calcDisplay.outputDisplay.innerText += e.target.innerText;
         calcDisplay.opBtnJustPressed = false;
     },
 
     // This function covers all operations performed by the calculator
-    opClick:function(e){
+    opClick:function(e, keyValue){
 
         calcDisplay.outputOverflow.innerText = '';
 
         // Gets the value of the div clicked, for sorting purposes
-        var clickVal = e.target.innerText;
+        var clickVal = e.target.innerText || keyValue;
         calcDisplay.opBtnJustPressed = true;
 
         // Transfers the click event to the parent div if a user clicks on the span instead
@@ -123,9 +165,9 @@ var calcDisplay = {
     },
 
     // This function covers non-operational action buttons on the calculator
-    actnClick:function(e){
+    actnClick:function(e, keyValue){
 
-        var clickVal = e.target.innerText;
+        var clickVal = e.target.innerText || keyValue;
 
         // Routing statement for the action buttons
         switch(clickVal){
@@ -242,6 +284,7 @@ function init(){
 
     $('div#calcBody').draggable({cancel:"a"});
     calcDisplay.initClickHandlers();
+    calcDisplay.initKeyHandlers();
 
     setTimeout(function(){
         window.scrollTo(0, 1);
