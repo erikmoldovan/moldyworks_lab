@@ -182,12 +182,15 @@ var calcDisplay = {
         try{
             returnVal = calcDisplay.operation(calcDisplay.firstNum, calcDisplay.secNum);
             var nLength = returnVal.toString().length;
+            console.log(nLength);
 
             if(returnVal <= 99999999 && nLength <= 7){
-                if(nLength = 3){
+                if(nLength <= 3){
                     returnVal = returnVal.toPrecision(nLength);
+                    console.log('true ' + nLength);
                 }else{
-                    returnVal = returnVal.toPrecision(nLength-1);
+                    returnVal = returnVal.toPrecision(nLength);
+                    console.log('false ' + (nLength));
                 }
             }else{
                 returnVal = returnVal.toPrecision(6);
@@ -238,6 +241,7 @@ function init(){
         outputOverflow:document.getElementById('displayOverflow')});
 
     $('div#calcBody').draggable({cancel:"a"});
+    window.scrollTo(0, 1);
     calcDisplay.initClickHandlers();
 }
 
