@@ -27,6 +27,7 @@ var calcDisplay = {
     operation:null,
     memNum:null,
     memBtnPressed:false,
+    decBtnPressed:false,
 
     // Processes click events and routes them to appropriate function based on the value of the button pressed
     initClickHandlers:function(){
@@ -57,10 +58,13 @@ var calcDisplay = {
         $(document).keypress(function(e){
             var keyPressed = e.charCode || e.keyCode;
 
-            if(keyPressed >= 48 && keyPressed <= 57){
+            if(keyPressed >= 49 && keyPressed <= 57){
                 calcDisplay.numClick(e, (keyPressed - 48));
             }else{
                 switch(keyPressed){
+                    case 48:
+                        calcDisplay.numClick(e, '0');
+                        break;
                     case 37:
                         calcDisplay.opClick(e, '%');
                         break;
@@ -75,6 +79,7 @@ var calcDisplay = {
                         break;
                     case 46:
                         calcDisplay.numClick(e, '.');
+                        calcDisplay.decBtnPressed = true;
                         break;
                     case 47:
                         calcDisplay.opClick(e, '/');
@@ -109,6 +114,10 @@ var calcDisplay = {
         // Appends new number to end of current number displayed
         if(keyValue){
             // Checks if a decimal has already been entered
+            if(keyValue == 48){
+                calcDisplay.outputDisplay.innerText += '0';
+            }
+
             if(calcDisplay.outputDisplay.innerText.indexOf('.') != -1 && keyValue == '.'){
                 return;
             }
@@ -240,14 +249,21 @@ var calcDisplay = {
                     returnVal = returnVal.toPrecision(6);
             }
 
-            // This block removes trailing zeros in decimal results
-            var rLength = returnVal.toString().length;
-            var tailNum = returnVal.toString().substring(rLength-1);
+            console.log(calcDisplay.decBtnPressed);
 
-            while(tailNum == '0'){
-                returnVal = returnVal.toString().substring(0, rLength -1);
-                rLength--;
-                tailNum = returnVal.toString().substring(rLength-1);
+            if(calcDisplay.decBtnPressed){
+                // This block removes trailing zeros in decimal results
+                var rLength = returnVal.toString().length;
+                var tailNum = returnVal.toString().substring(rLength-1);
+                console.log(tailNum);
+
+                while(tailNum == '0'){
+                    returnVal = returnVal.toString().substring(0, rLength -1);
+                    rLength--;
+                    tailNum = returnVal.toString().substring(rLength-1);
+                }
+
+                calcDisplay.decBtnPressed = false;
             }
 
             // In case the answer goes into exponents, substring out the E part and display it in the overflow section
