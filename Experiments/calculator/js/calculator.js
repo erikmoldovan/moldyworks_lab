@@ -56,7 +56,6 @@ var calcDisplay = {
     initKeyHandlers:function(){
         $(document).keypress(function(e){
             var keyPressed = e.charCode || e.keyCode;
-            console.log(keyPressed);
 
             if(keyPressed >= 48 && keyPressed <= 57){
                 calcDisplay.numClick(e, (keyPressed - 48));
@@ -64,25 +63,29 @@ var calcDisplay = {
                 switch(keyPressed){
                     case 37:
                         calcDisplay.opClick(e, '%');
-                        return;
+                        break;
                     case 42:
                         calcDisplay.opClick(e, '*');
-                        return;
+                        break;
                     case 43:
                         calcDisplay.opClick(e, '+');
-                        return;
+                        break;
                     case 45:
                         calcDisplay.opClick(e, '-');
-                        return;
+                        break;
                     case 46:
                         calcDisplay.numClick(e, '.');
-                        return;
+                        break;
                     case 47:
                         calcDisplay.opClick(e, '/');
-                        return;
+                        break;
                     case 61:
+                    case 13:
                         calcDisplay.actnClick(e, '=');
-                        return;
+                        break;
+                    case 99:
+                        calcDisplay.actnClick(e, 'C');
+                        break;
                 }
             }
         })
@@ -103,15 +106,17 @@ var calcDisplay = {
             return;
         }
 
+        // Appends new number to end of current number displayed
         if(keyValue){
+            // Checks if a decimal has already been entered
+            if(calcDisplay.outputDisplay.innerText.indexOf('.') != -1 && keyValue == '.'){
+                return;
+            }
             calcDisplay.outputDisplay.innerText += (keyValue);
-            calcDisplay.opBtnJustPressed = false;
-
-            return;
+        }else{
+            calcDisplay.outputDisplay.innerText += e.target.innerText;
         }
 
-        // Appends new number to end of current number displayed
-        calcDisplay.outputDisplay.innerText += e.target.innerText;
         calcDisplay.opBtnJustPressed = false;
     },
 
@@ -121,7 +126,7 @@ var calcDisplay = {
         calcDisplay.outputOverflow.innerText = '';
 
         // Gets the value of the div clicked, for sorting purposes
-        var clickVal = e.target.innerText || keyValue;
+        var clickVal = keyValue|| e.target.innerText;
         calcDisplay.opBtnJustPressed = true;
 
         // Transfers the click event to the parent div if a user clicks on the span instead
@@ -167,7 +172,7 @@ var calcDisplay = {
     // This function covers non-operational action buttons on the calculator
     actnClick:function(e, keyValue){
 
-        var clickVal = e.target.innerText || keyValue;
+        var clickVal = keyValue || e.target.innerText;
 
         // Routing statement for the action buttons
         switch(clickVal){
@@ -175,22 +180,20 @@ var calcDisplay = {
                 calcDisplay.outputDisplay.innerText = calcDisplay.memNum;
                 calcDisplay.outputOverflow.innerText = "MR";
                 break;
-            case 'M+': //
+            case 'M+': // Memory Add
                 calcDisplay.memNum += parseFloat(calcDisplay.outputDisplay.innerText);
                 calcDisplay.outputOverflow.innerText = 'M+';
-                console.log(calcDisplay.memNum);
                 break;
-            case 'M-':
+            case 'M-': // Memory Subtract
                 calcDisplay.memNum -= parseFloat(calcDisplay.outputDisplay.innerText);
                 calcDisplay.outputOverflow.innerText = 'M-';
-                console.log(calcDisplay.memNum);
                 break;
-            case 'MC':
+            case 'MC': // Clear Memory
                 calcDisplay.memNum = null;
                 calcDisplay.outputOverflow.innerText = 'MC';
-                console.log(calcDisplay.memNum);
                 break;
-            case 'C':
+            case 'C': // Clear display
+            case 99:
                 calcDisplay.outputDisplay.innerText = '';
                 calcDisplay.outputOverflow.innerText = '';
                 calcDisplay.opBtnPressed = false;
@@ -199,7 +202,9 @@ var calcDisplay = {
                 calcDisplay.operation = null;
                 calcDisplay.eqJustPressed = false;
                 break;
-            case '=':
+            case '=': // Evaluate
+            case 61:
+            case 13:
                 calcDisplay.process();
                 break;
         }
@@ -224,18 +229,25 @@ var calcDisplay = {
         try{
             returnVal = calcDisplay.operation(calcDisplay.firstNum, calcDisplay.secNum);
             var nLength = returnVal.toString().length;
-            console.log(nLength);
 
             if(returnVal <= 99999999 && nLength <= 7){
                 if(nLength <= 3){
                     returnVal = returnVal.toPrecision(nLength);
-                    console.log('true ' + nLength);
                 }else{
                     returnVal = returnVal.toPrecision(nLength);
-                    console.log('false ' + (nLength));
                 }
             }else{
-                returnVal = returnVal.toPrecision(6);
+                    returnVal = returnVal.toPrecision(6);
+            }
+
+            // This block removes trailing zeros in decimal results
+            var rLength = returnVal.toString().length;
+            var tailNum = returnVal.toString().substring(rLength-1);
+
+            while(tailNum == '0'){
+                returnVal = returnVal.toString().substring(0, rLength -1);
+                rLength--;
+                tailNum = returnVal.toString().substring(rLength-1);
             }
 
             // In case the answer goes into exponents, substring out the E part and display it in the overflow section
@@ -245,7 +257,7 @@ var calcDisplay = {
             }
 
             calcDisplay.outputDisplay.innerText = returnVal;
-            calcDisplay.firstNum = returnVal;
+            calcDisplay.firstNum = parseFloat(returnVal); // Very important
         }
         catch(err){
             calcDisplay.firstNum = parseFloat(calcDisplay.outputDisplay.innerText);
