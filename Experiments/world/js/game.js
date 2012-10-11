@@ -11,8 +11,9 @@ function drawWorld(){
     var ctx=c.getContext("2d");
 
     var colors = ["black", "white", "black"];
-    var newDir, lastDir;
-    var flipFlag = false;
+    var newFacing, lastFacing;
+    var continueFlag = false;
+    var stickyFlag = false;
 
     var startAngle = 0;
     var arc = Math.PI / 6;
@@ -40,39 +41,43 @@ function drawWorld(){
     $(document).keypress(function(e){
 
         var keyPressed = e.charCode || e.keyCode;
+        console.log('keyPressed: ' + keyPressed);
 
         if(keyPressed == 119){
-            newDir = "left";
+            newFacing = "left";
         }else if(keyPressed == 101){
-            newDir = "right";
+            newFacing = "right";
         }
 
-        console.log('newDir: ' + newDir + ', lastDir: ' + lastDir);
-
-        if(newDir == lastDir){
-            flipFlag = true;
+        if(newFacing == lastFacing){
+            continueFlag = true;
         }
 
-        console.log(flipFlag);
-
-        worldFill(flipFlag, newDir);
+        worldFill();
     });
 
-    function worldFill(doFlip, newDirection){
+    function worldFill(){
 
-        var directionMod;
-        var i;
+        var direction;
 
-        if(flipFlag){
-            switch(newDirection){
-                case "right":
-                    newDirection = "left";
-                    break;
-                case "left":
-                    newDirection = "right";
-                    break;
+        console.log('continueFlag: ' + continueFlag + ', stickyFlag: ' + stickyFlag);
+
+        if(continueFlag){
+            if((stickyFlag == true)){
+
             }
+
+            continueFlag = false;
+            stickyFlag = true;
+        }else{
+            direction = newFacing;
+            stickyFlag = false;
         }
+
+        console.log('newFacing: ' + newFacing + ', lastFacing: ' + lastFacing);
+        console.log('direction: ' + direction);
+
+        lastFacing = newFacing;
 
         /*if(newDirection == "right"){
             directionMod = i%2;
@@ -98,8 +103,6 @@ function drawWorld(){
         ctx.moveTo(285,170);
         ctx.lineTo(315,150);
         ctx.stroke();*/
-
-        lastDir = newDirection;
     }
 }
 
