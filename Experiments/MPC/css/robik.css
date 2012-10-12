@@ -1,0 +1,176 @@
+@font-face
+{
+    font-family:"digital7";
+    src: url('Digital-7Mono.woff');
+}
+
+.mpc-wrapper {
+    border: 3px solid black;
+    border-radius: 10px;
+    height: 600px;
+    width: 438px;
+    background-color: black;
+    background-image:-webkit-linear-gradient(-53deg,rgba(255, 255, 255, .3) 0% , rgba(255, 255, 255, .5) 50% , transparent 98%, transparent 100% ),-webkit-linear-gradient(black 100%, #AAA 20%);
+    -moz-box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.5);
+    box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.5);
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#displayField {
+    font-family:"digital7";
+    border: 3px solid black;
+    color:#dbd2e7;
+    border-radius: 10px;
+    height: 145px;
+    width: 412px;
+    margin: 10px;
+    background-color: #7859a3;
+    -moz-box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.5) inset;
+    -webkit-box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.5) inset;
+    box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.5) inset;
+}
+
+#titleDisplay {
+    font-size: 40px;
+    height:24%;
+    margin: 8px;
+    border-bottom:1px solid #dbd2e7;
+}
+
+#titleDisplay>div{
+    height:100%;
+    float:left;
+}
+
+#soundTitle{
+    width:74%;
+}
+
+#volume{
+    width:14%;
+}
+
+#padNum{
+    width:10%;
+    text-align:right;
+}
+
+#waveformDisplay {
+    height:56%;
+    font-size: 24px;
+}
+
+#waveformDisplay>div{
+    background-color: #dbd2e7;
+    color:#7859a3;
+    position:relative;
+    width:50px;
+    height:24px;
+    top:-24px;
+    text-align:center;
+    display:inline-block;
+}
+
+#waveform{
+    width:100%;
+    height:100%;
+}
+
+#soundPos{
+    float:left;
+}
+
+#soundLength{
+    float:right;
+}
+
+#modBtnDisplay {
+    position:relative;
+    top:-24px;
+    height:10%;
+    width:100%;
+    display:table;
+    font-size: 12px;
+    text-align:center;
+    font-family:"digital7";
+}
+
+.displayOverflow{
+    width:auto;
+    display:table-cell;
+}
+
+#buttonDrawArea {
+    position: relative;
+    left: 2px;
+    margin: 10px;
+    width:94%;
+    height:66%;
+}
+
+#subBtnDrawArea {
+    height:21%;
+    width:100%;
+}
+
+#softBtns{
+    height:40px;
+    display:table;
+}
+
+#softBtns>a>.modBtn{
+    margin: 0px 41px;
+}
+
+#modBtns{
+    height:40px;
+    width:100%;
+    display:table-cell;
+}
+
+#soundBtnDrawArea{
+    position: relative;
+    width:100%;
+    height:84%;
+    padding:4px;
+}
+
+div.modBtn {
+    border-radius: 6px;
+    height: 0.5px;
+    width: 50px;
+    margin: 0px 74px;
+}
+
+.btns {
+    text-align: center;
+    padding: 10.5px 0;
+    border: 2px inset black;
+    border-radius: 4px;
+    display: block;
+    float: left;
+    margin: 5px;
+    background: #BDBDBD;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#D4D4D4), to(#BDBDBD));
+    -moz-box-shadow: 1px 0px 1px #203891,0px 1px 1px #3852B1,2px 1px 1px #203891,1px 2px 1px #3852B1,3px 2px 1px #203891,2px 3px 1px #3852B1,4px 3px 1px #203891,3px 4px 1px #3852B1,5px 4px 1px #203891,4px 5px 1px #3852B1,6px 5px 1px #203891;
+    -webkit-box-shadow: 1px 0px 1px #203891,0px 1px 1px #3852B1,2px 1px 1px #203891,1px 2px 1px #3852B1,3px 2px 1px #203891,2px 3px 1px #3852B1,4px 3px 1px #203891,3px 4px 1px #3852B1,5px 4px 1px #203891,4px 5px 1px #3852B1,6px 5px 1px #203891;
+    box-shadow: 1px 0px 1px #203891,0px 1px 1px #3852B1,2px 1px 1px #203891,1px 2px 1px #3852B1,3px 2px 1px #203891,2px 3px 1px #3852B1,4px 3px 1px #203891,3px 4px 1px #3852B1,5px 4px 1px #203891,4px 5px 1px #3852B1,6px 5px 1px #203891;
+}
+
+.soundBtn {
+    height: 14%;
+    width: 21%;
+}
+
+#logo{
+    color:white;
+    position:relative;
+    top:-28px;
+    text-align: center;
+    font-size: 24px;
+}

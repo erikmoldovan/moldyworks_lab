@@ -32,7 +32,7 @@
     box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.5) inset;
 }
 
-#displayArea {
+#mainDisplay {
     font-size: 48px;
     padding: 8px;
     text-align:right;
@@ -54,7 +54,7 @@
     margin: 10px;
 }
 
-.btn {
+.btns {
     text-align: center;
     padding: 10.5px 0;
     border: 2px inset black;
@@ -78,15 +78,15 @@ a{
     padding:1px;
 }
 
-a:active .btn {
+a:active .btns {
     background-image: -webkit-gradient(linear, left top, left bottom, from(#CECECE), to(#D4D4D4));
 }
 
-.btn:hover {
+.btns:hover {
     background-image: -webkit-gradient(linear, left top, left bottom, from(#ECECEC), to(#C4C4C4));
 }
 
-.btn span {
+.btns span {
     width: 0px;
     height: 0px;
 }
