@@ -85,7 +85,6 @@ var mpcDisplay = {
     },
 
     processInput:function(keyCode){
-        mpcDisplay.padNum.addClass
         mpcDisplay.padNum.text(keyCode);
     }
 };
