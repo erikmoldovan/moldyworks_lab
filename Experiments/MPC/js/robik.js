@@ -7,30 +7,25 @@
  */
 
 var mpcDisplay = {
+    soundBank: [],
 
     initClickHandlers:function(){
-
-
-
-        /*for(i = 0; i < this.numBtns.length; i++){
-            this.numBtns[i].onclick = this.numClick;
-        }
-
         var that = this;
-        $.each(this.opBtns, function(i){
-            this.onclick = that.opClick;
+
+        $('.soundBtn').click(function(e){
+            var keyPressed = $(this).attr('data-button');
+            that.processInput(keyPressed);
         });
 
-        $.each(this.actnBtns, function(i){
-            this.onclick = that.actnClick;
-        });
-
-        $('div.btn').click(function(){
-            $('div#displayArea').fadeOut(50, function(){$('div#displayArea').fadeIn(50);});
+        /*$('.modBtn').click(function(e){
+            var keyPressed = $(this).attr('data-button');
+            that.processInput(keyPressed);
         });*/
     },
 
     initKeyHandlers:function(){
+        var that = this;
+
         $(document).keypress(function(e){
             var keyPressed = e.charCode || e.keyCode;
 
@@ -74,24 +69,42 @@ var mpcDisplay = {
                     case 118:
                         keyPressed = 16;
                         break;
+                    default:
+                        that.inputAccepted();
+                        alert(keyPressed);
+                        return;
                 }
             }
 
-            console.log(keyPressed);
+            that.processInput(keyPressed);
         })
+    },
+
+    inputAccepted:function(){
+        console.log("malarkey");
+    },
+
+    processInput:function(keyCode){
+        mpcDisplay.padNum.addClass
+        mpcDisplay.padNum.text(keyCode);
     }
 };
 
 function init(){
+    $.each($('.soundBtn'), function(i){
+        mpcDisplay.soundBank.push({
+            triggerPad: $(this).attr('data-button'),
+            element: $(this),
+            soundTitle: null,
+            fileName: null,
+            sLength: null
+        });
+
+    });
+
     $.extend(mpcDisplay, {
-        numPads:{
-            modBtn:document.getElementById('buttonmodulus'),
-            divBtn:document.getElementById('buttondivide'),
-            mulBtn:document.getElementById('buttonmultiply'),
-            subBtn:document.getElementById('buttonsubtract'),
-            addBtn:document.getElementById('buttonadd')
-        }
-    }
+        padNum:$('#padNum')
+    });
 
     mpcDisplay.initClickHandlers();
     mpcDisplay.initKeyHandlers();

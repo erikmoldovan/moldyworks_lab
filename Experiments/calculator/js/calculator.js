@@ -255,7 +255,6 @@ var calcDisplay = {
                 // This block removes trailing zeros in decimal results
                 var rLength = returnVal.toString().length;
                 var tailNum = returnVal.toString().substring(rLength-1);
-                console.log(tailNum);
 
                 while(tailNum == '0'){
                     returnVal = returnVal.toString().substring(0, rLength -1);
