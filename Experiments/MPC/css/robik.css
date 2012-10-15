@@ -4,6 +4,10 @@
     src: url('Digital-7Mono.woff');
 }
 
+html{
+    background: #D5D5D5;
+}
+
 .mpc-wrapper {
     border: 3px solid black;
     border-radius: 10px;
@@ -19,6 +23,7 @@
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    float: left;
 }
 
 #displayField {
@@ -172,4 +177,26 @@ div.modBtn {
     top:-28px;
     text-align: center;
     font-size: 24px;
+}
+
+a:active .btns {
+    background: #FFA400;
+    -moz-box-shadow: 1px 0px 1px #8A8A8A,0px 1px 1px #ACACAC,2px 1px 1px #8A8A8A,1px 2px 1px #ACACAC,3px 2px 1px #8A8A8A,2px 3px 1px #ACACAC,4px 3px 1px #8A8A8A,3px 4px 1px #ACACAC,5px 4px 1px #8A8A8A,4px 5px 1px #ACACAC,6px 5px 1px #8A8A8A;
+    -webkit-box-shadow: 1px 0px 1px #8A8A8A,0px 1px 1px #ACACAC,2px 1px 1px #8A8A8A,1px 2px 1px #ACACAC,3px 2px 1px #8A8A8A,2px 3px 1px #ACACAC,4px 3px 1px #8A8A8A,3px 4px 1px #ACACAC,5px 4px 1px #8A8A8A,4px 5px 1px #ACACAC,6px 5px 1px #8A8A8A;
+    box-shadow: 1px 0px 1px #FF6F00,0px 1px 1px #FF7F00,2px 1px 1px #FF6F00,1px 2px 1px #FF7F00,3px 2px 1px #FF6F00,2px 3px 1px #FF7F00,4px 3px 1px #FF6F00,3px 4px 1px #FF7F00,5px 4px 1px #FF6F00,4px 5px 1px #FF7F00,6px 5px 1px #FF6F00;
+}
+#tutDescription {
+    border: 3px solid black;
+    border-radius: 10px;
+    height: 590px;
+    width: 428px;
+    float: left;
+    margin-left: 20px;
+    padding: 6px;
+}
+
+#wrapper{
+    width: 920px;
+    height: 600px;
+    margin: auto;
 }

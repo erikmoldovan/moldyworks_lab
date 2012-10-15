@@ -10,59 +10,64 @@
     <script type="text/javascript" src="js/robik.js"></script>
 </head>
 <body>
-    <div class="mpc-wrapper">
-        <div id="displayField">
-            <div id="titleDisplay">
-                <div id="soundTitle">Track 21</div>
-                <div id="volume">45</div>
-                <div id="padNum">6</div>
+    <div id="wrapper">
+        <div class="mpc-wrapper">
+            <div id="displayField">
+                <div id="titleDisplay">
+                    <div id="soundTitle">Track 21</div>
+                    <div id="volume">45</div>
+                    <div id="padNum">6</div>
+                </div>
+                <div id="waveformDisplay">
+                    <canvas id="waveform"></canvas>
+                    <div id="soundPos">1:43</div>
+                    <div id="soundLength">2:31</div>
+                </div>
+                <div id="modBtnDisplay">
+                    <div class="displayOverflow" id="modDisplay1">Bleep</div>
+                    <div class="displayOverflow" id="modDisplay2">Blorp</div>
+                    <div class="displayOverflow" id="modDisplay3">Bloop</div>
+                </div>
             </div>
-            <div id="waveformDisplay">
-                <canvas id="waveform"></canvas>
-                <div id="soundPos">1:43</div>
-                <div id="soundLength">2:31</div>
-            </div>
-            <div id="modBtnDisplay">
-                <div class="displayOverflow" id="modDisplay1">Bleep</div>
-                <div class="displayOverflow" id="modDisplay2">Blorp</div>
-                <div class="displayOverflow" id="modDisplay3">Bloop</div>
+            <div id="buttonDrawArea">
+                <div id="subBtnDrawArea">
+                    <div id="softBtns">
+                        <a><div class="btns modBtn" id="soft1"></div></a>
+                        <a><div class="btns modBtn" id="soft2"></div></a>
+                        <a><div class="btns modBtn" id="soft3"></div></a>
+                    </div>
+                    <div id="modBtns">
+                        <a><div class="btns modBtn" id="mod1"></div></a>
+                        <a><div class="btns modBtn" id="mod2"></div></a>
+                    </div>
+                    <div id="logo">
+                        LOGO
+                    </div>
+                </div>
+                <div id="soundBtnDrawArea">
+                    <a><div class="btns soundBtn" id="pad1"><span></span></div></a>
+                    <a><div class="btns soundBtn" id="pad2"><span></span></div></a>
+                    <a><div class="btns soundBtn" id="pad3"><span></span></div></a>
+                    <a><div class="btns soundBtn" id="pad4"><span></span></div></a>
+                    <a><div class="btns soundBtn" id="pad5"><span></span></div></a>
+                    <a><div class="btns soundBtn" id="pad6"><span></span></div></a>
+                    <a><div class="btns soundBtn" id="pad7"><span></span></div></a>
+                    <a><div class="btns soundBtn" id="pad8"><span></span></div></a>
+                    <a><div class="btns soundBtn" id="pad9"><span></span></div></a>
+                    <a><div class="btns soundBtn" id="pad10"><span></span></div></a>
+                    <a><div class="btns soundBtn" id="pad11"><span></span></div></a>
+                    <a><div class="btns soundBtn" id="pad12"><span></span></div></a>
+                    <a><div class="btns soundBtn" id="pad13"><span></span></div></a>
+                    <a><div class="btns soundBtn" id="pad14"><span></span></div></a>
+                    <a><div class="btns soundBtn" id="pad15"><span></span></div></a>
+                    <a><div class="btns soundBtn" id="pad16"><span></span></div></a>
+                </div>
             </div>
         </div>
-        <div id="buttonDrawArea">
-            <div id="subBtnDrawArea">
-                <div id="softBtns">
-                    <a><div class="btns modBtn" id="soft1"></div></a>
-                    <a><div class="btns modBtn" id="soft2"></div></a>
-                    <a><div class="btns modBtn" id="soft3"></div></a>
-                </div>
-                <div id="modBtns">
-                    <a><div class="btns modBtn" id="mod1"></div></a>
-                    <a><div class="btns modBtn" id="mod2"></div></a>
-                </div>
-                <div id="logo">
-                    LOGO
-                </div>
-            </div>
-            <div id="soundBtnDrawArea">
-                <a><div class="btns soundBtn" id="pad1"><span></span></div></a>
-                <a><div class="btns soundBtn" id="pad2"><span></span></div></a>
-                <a><div class="btns soundBtn" id="pad3"><span></span></div></a>
-                <a><div class="btns soundBtn" id="pad4"><span></span></div></a>
-                <a><div class="btns soundBtn" id="pad5"><span></span></div></a>
-                <a><div class="btns soundBtn" id="pad6"><span></span></div></a>
-                <a><div class="btns soundBtn" id="pad7"><span></span></div></a>
-                <a><div class="btns soundBtn" id="pad8"><span></span></div></a>
-                <a><div class="btns soundBtn" id="pad9"><span></span></div></a>
-                <a><div class="btns soundBtn" id="pad10"><span></span></div></a>
-                <a><div class="btns soundBtn" id="pad11"><span></span></div></a>
-                <a><div class="btns soundBtn" id="pad12"><span></span></div></a>
-                <a><div class="btns soundBtn" id="pad13"><span></span></div></a>
-                <a><div class="btns soundBtn" id="pad14"><span></span></div></a>
-                <a><div class="btns soundBtn" id="pad15"><span></span></div></a>
-                <a><div class="btns soundBtn" id="pad16"><span></span></div></a>
-            </div>
+
+        <div id="tutDescription">
+            Blah blah blah blah
         </div>
-    </div>
     </div>
 </body>
 </html>
