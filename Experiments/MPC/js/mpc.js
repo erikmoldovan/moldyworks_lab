@@ -8,18 +8,17 @@
 
 var mpcDisplay = {
     soundBank: [],
+    lastSoundBtn: null,
 
     initClickHandlers:function(){
         var that = this;
 
         $('.soundBtn').click(function(e){
-            var keyPressed = $(this).attr('data-button');
-            that.processInput(keyPressed);
+            that.processInput($(this).attr('data-button'));
         });
 
         /*$('.modBtn').click(function(e){
-            var keyPressed = $(this).attr('data-button');
-            that.processInput(keyPressed);
+            that.processInput($(this).attr('data-button'));
         });*/
     },
 
@@ -75,7 +74,6 @@ var mpcDisplay = {
                         return;
                 }
             }
-
             that.processInput(keyPressed);
         })
     },
@@ -85,7 +83,23 @@ var mpcDisplay = {
     },
 
     processInput:function(keyCode){
-        mpcDisplay.padNum.text(keyCode);
+        console.log(keyCode);
+        var btnKey = this.soundBank[keyCode - 1];
+
+        if(this.lastSoundBtn != null){
+            console.log('Last Button element: ' + this.soundBank[this.lastSoundBtn].triggerPad);
+
+            this.soundBank[this.lastSoundBtn].element.removeClass('soundBtnActive');
+        }
+
+        console.log('btnKey.element: ' + btnKey.triggerPad);
+
+        btnKey.element.addClass('soundBtnActive');
+        btnKey.element.addClass('playing');
+        this.lastSoundBtn = btnKey.element.attr('data-button');
+        console.log('=======');
+
+        this.padNum.text(keyCode);
     }
 };
 
@@ -98,7 +112,6 @@ function init(){
             fileName: null,
             sLength: null
         });
-
     });
 
     $.extend(mpcDisplay, {
