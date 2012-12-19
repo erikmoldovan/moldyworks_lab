@@ -58,5 +58,6 @@
         <link rel="stylesheet" type="text/css" href="map.css">
     </head>
     <body>
+        <svg width="960" height="500"></svg>
     </body>
 </html>
