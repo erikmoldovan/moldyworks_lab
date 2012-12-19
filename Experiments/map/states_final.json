@@ -1,5 +1,7 @@
 {"type":"FeatureCollection", "features":[
     {
+        "code":"3",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/alabama.html",
         "type":"Feature",
         "id":"01",
         "properties":{
@@ -47,6 +49,8 @@
         }
     },
     {
+        "code":"3",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/alaska.html",
         "type":"Feature",
         "id":"02",
         "properties":{
@@ -1289,6 +1293,8 @@
         }
     },
     {
+        "code":"1",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/arizona.html",
         "type":"Feature",
         "id":"04",
         "properties":{
@@ -1335,6 +1341,8 @@
         }
     },
     {
+        "code":"3",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/arkansas.html",
         "type":"Feature",
         "id":"05",
         "properties":{
@@ -1386,6 +1394,8 @@
         }
     },
     {
+        "code":"3",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/california.html",
         "type":"Feature",
         "id":"06",
         "properties":{
@@ -1493,6 +1503,8 @@
         }
     },
     {
+        "code":"3",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/colorado.html",
         "type":"Feature",
         "id":"08",
         "properties":{
@@ -1523,6 +1535,8 @@
         }
     },
     {
+        "code":"3",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/connecticut.html",
         "type":"Feature",
         "id":"09",
         "properties":{
@@ -1553,6 +1567,8 @@
         }
     },
     {
+        "code":"3",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/delaware.html",
         "type":"Feature",
         "id":"10",
         "properties":{
@@ -1580,25 +1596,8 @@
         }
     },
     {
-        "type":"Feature",
-        "id":"11",
-        "properties":{
-            "name":"District of Columbia"
-        },
-        "geometry":{
-            "type":"Polygon",
-            "coordinates":[
-                [
-                    [-77.035264, 38.993869],
-                    [-76.909294, 38.895284],
-                    [-77.040741, 38.791222],
-                    [-77.117418, 38.933623],
-                    [-77.035264, 38.993869]
-                ]
-            ]
-        }
-    },
-    {
+        "code":"3",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/florida.html",
         "type":"Feature",
         "id":"12",
         "properties":{
@@ -1691,6 +1690,8 @@
         }
     },
     {
+        "code":"3",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/georgia.html",
         "type":"Feature",
         "id":"13",
         "properties":{
@@ -1756,6 +1757,8 @@
         }
     },
     {
+        "code":"3",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/hawaii.html",
         "type":"Feature",
         "id":"15",
         "properties":{
@@ -1837,6 +1840,8 @@
         }
     },
     {
+        "code":"3",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/idaho.html",
         "type":"Feature",
         "id":"16",
         "properties":{
@@ -1917,6 +1922,8 @@
         }
     },
     {
+        "code":"1",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/illinois.html",
         "type":"Feature",
         "id":"17",
         "properties":{
@@ -1998,6 +2005,8 @@
         }
     },
     {
+        "code":"1",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/indiana.html",
         "type":"Feature",
         "id":"18",
         "properties":{
@@ -2058,6 +2067,8 @@
         }
     },
     {
+        "code":"3",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/iowa.html",
         "type":"Feature",
         "id":"19",
         "properties":{
@@ -2122,6 +2133,8 @@
         }
     },
     {
+        "code":"1",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/kansas.html",
         "type":"Feature",
         "id":"20",
         "properties":{
@@ -2149,6 +2162,8 @@
         }
     },
     {
+        "code":"3",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/kentucky.html",
         "type":"Feature",
         "id":"21",
         "properties":{
@@ -2238,6 +2253,8 @@
         }
     },
     {
+        "code":"3",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/louisiana.html",
         "type":"Feature",
         "id":"22",
         "properties":{
@@ -2328,6 +2345,8 @@
         }
     },
     {
+        "code":"3",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/maine.html",
         "type":"Feature",
         "id":"23",
         "properties":{
@@ -2408,6 +2427,8 @@
         }
     },
     {
+        "code":"3",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/maryland.html",
         "type":"Feature",
         "id":"24",
         "properties":{
@@ -2492,6 +2513,8 @@
         }
     },
     {
+        "code":"3",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/massachusetts.html",
         "type":"Feature",
         "id":"25",
         "properties":{
@@ -2541,6 +2564,8 @@
         }
     },
     {
+        "code":"3",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/michigan.html",
         "type":"Feature",
         "id":"26",
         "properties":{
@@ -2721,6 +2746,8 @@
         }
     },
     {
+        "code":"1",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/minnesota.html",
         "type":"Feature",
         "id":"27",
         "properties":{
@@ -2818,6 +2845,8 @@
         }
     },
     {
+        "code":"3",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/mississippi.html",
         "type":"Feature",
         "id":"28",
         "properties":{
@@ -2878,6 +2907,8 @@
         }
     },
     {
+        "code":"3",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/missouri.html",
         "type":"Feature",
         "id":"29",
         "properties":{
@@ -2945,6 +2976,8 @@
         }
     },
     {
+        "code":"2",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/montana.html",
         "type":"Feature",
         "id":"30",
         "properties":{
@@ -3011,6 +3044,8 @@
         }
     },
     {
+        "code":"3",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/nebraska.html",
         "type":"Feature",
         "id":"31",
         "properties":{
@@ -3054,6 +3089,8 @@
         }
     },
     {
+        "code":"3",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/nevada.html",
         "type":"Feature",
         "id":"32",
         "properties":{
@@ -3089,6 +3126,8 @@
         }
     },
     {
+        "code":"3",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/new-hampshire.html",
         "type":"Feature",
         "id":"33",
         "properties":{
@@ -3131,6 +3170,8 @@
         }
     },
     {
+        "code":"3",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/new-jersey.html",
         "type":"Feature",
         "id":"34",
         "properties":{
@@ -3177,6 +3218,8 @@
         }
     },
     {
+        "code":"3",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/new-mexico.html",
         "type":"Feature",
         "id":"35",
         "properties":{
@@ -3208,6 +3251,8 @@
         }
     },
     {
+        "code":"3",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/new-york.html",
         "type":"Feature",
         "id":"36",
         "properties":{
@@ -3290,6 +3335,8 @@
         }
     },
     {
+        "code":"3",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/north-carolina.html",
         "type":"Feature",
         "id":"37",
         "properties":{
@@ -3365,6 +3412,8 @@
         }
     },
     {
+        "code":"1",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/north-dakota.html",
         "type":"Feature",
         "id":"38",
         "properties":{
@@ -3395,6 +3444,8 @@
         }
     },
     {
+        "code":"3",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/ohio.html",
         "type":"Feature",
         "id":"39",
         "properties":{
@@ -3456,6 +3507,8 @@
         }
     },
     {
+        "code":"3",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/oklahoma.html",
         "type":"Feature",
         "id":"40",
         "properties":{
@@ -3515,6 +3568,8 @@
         }
     },
     {
+        "code":"3",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/oregon.html",
         "type":"Feature",
         "id":"41",
         "properties":{
@@ -3585,6 +3640,8 @@
         }
     },
     {
+        "code":"3",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/pennsylvania.html",
         "type":"Feature",
         "id":"42",
         "properties":{
@@ -3632,6 +3689,8 @@
         }
     },
     {
+        "code":"3",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/rhode-island.html",
         "type":"Feature",
         "id":"44",
         "properties":{
@@ -3667,6 +3726,8 @@
         }
     },
     {
+        "code":"3",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/south-carolina.html",
         "type":"Feature",
         "id":"45",
         "properties":{
@@ -3725,6 +3786,8 @@
         }
     },
     {
+        "code":"3",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/south-dakota.html",
         "type":"Feature",
         "id":"46",
         "properties":{
@@ -3768,6 +3831,8 @@
         }
     },
     {
+        "code":"1",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/tennessee.html",
         "type":"Feature",
         "id":"47",
         "properties":{
@@ -3825,6 +3890,8 @@
         }
     },
     {
+        "code":"1",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/texas.html",
         "type":"Feature",
         "id":"48",
         "properties":{
@@ -3991,6 +4058,8 @@
         }
     },
     {
+        "code":"3",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/utah.html",
         "type":"Feature",
         "id":"49",
         "properties":{
@@ -4017,6 +4086,8 @@
         }
     },
     {
+        "code":"3",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/vermont.html",
         "type":"Feature",
         "id":"50",
         "properties":{
@@ -4059,6 +4130,8 @@
         }
     },
     {
+        "code":"3",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/virginia.html",
         "type":"Feature",
         "id":"51",
         "properties":{
@@ -4163,6 +4236,8 @@
         }
     },
     {
+        "code":"3",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/washington.html",
         "type":"Feature",
         "id":"53",
         "properties":{
@@ -4259,6 +4334,8 @@
         }
     },
     {
+        "code":"3",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/west-virginia.html",
         "type":"Feature",
         "id":"54",
         "properties":{
@@ -4338,6 +4415,8 @@
         }
     },
     {
+        "code":"3",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/wisconsin.html",
         "type":"Feature",
         "id":"55",
         "properties":{
@@ -4427,6 +4506,8 @@
         }
     },
     {
+        "code":"3",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/wyoming.html",
         "type":"Feature",
         "id":"56",
         "properties":{
