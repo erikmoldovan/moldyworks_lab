@@ -7,34 +7,34 @@
  */
 
 d3.json("states_final.json", function(collection) {
-        d3.select("svg").selectAll("path")
-            .data(collection.features)
-            .enter().append("path")
-            .attr("d", d3.geo.path().projection(d3.geo.albersUsa()))
-            .style("fill", fillStates)
-            .on("click", click)
-            .on("mouseover", hoverOnState)
-            .on("mouseout", hoverOutState);
-    });
+    d3.select('svg').selectAll("path")
+        .data(collection.features)
+        .enter().append("path")
+        .attr("d", d3.geo.path().projection(d3.geo.albersUsa()))
+        .style("fill", fillStates)
+        .on("click", click)
+        .on("mouseover", hoverOnState)
+        .on("mouseout", hoverOutState);
+});
 
-    function fillStates(d){
-        if(d.code == 3){
-            return "blue";
-        } else if(d.code == 2){
-            return "red";
-        } else if(d.code == 1){
-            return "green";
-        }
+function fillStates(d){
+    if(d.code == 3){
+        return "blue";
+    } else if(d.code == 2){
+        return "red";
+    } else if(d.code == 1){
+        return "green";
     }
+}
 
-    function hoverOnState(d){
-        d3.select(this).style("fill", "yellow");
-    }
+function hoverOnState(d){
+    d3.select(this).style("fill", "yellow");
+}
 
-    function hoverOutState(d){
-        d3.select(this).style("fill", fillStates(d));
-    }
+function hoverOutState(d){
+    d3.select(this).style("fill", fillStates(d));
+}
 
-    function click(d){
-        window.open(d.url);
-    }
+function click(d){
+    window.open(d.url);
+}
