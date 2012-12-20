@@ -1,0 +1,9 @@
+body {
+    background-color: #ccc;
+}
+
+path {
+    fill: #ccc;
+    stroke: #fff;
+    stroke-width: 1px;
+}
