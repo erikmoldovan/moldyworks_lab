@@ -1,7 +1,6 @@
 <?php
 /*
     Stuff left to do:
-        Make IE8 fallback (based on image mapping)
         Add blocks to select small states
         Add map key
         Add state acronyms to map
@@ -56,19 +55,18 @@
          <script src="r2d3.v2.js"></script>
          <script type="text/javascript">ie8 = true;</script>
          
-         <!--[if !IE]>-->
+         <!--[if (!IE)|(gte IE 9)]>-->
             <script src="d3.v2.js"></script>
-            <script type="text/javascript">
-                ie8 = false;
-            </script>
+            <script type="text/javascript">ie8 = false;</script>
          <!--<![endif]-->
-        
         
         <link rel="stylesheet" type="text/css" href="map.css">
     </head>
     <body>
         <div id="mapContainer">
+            <!--[if (!IE)|(gte IE 9)]>-->
             <svg id="mapDrawArea" "width="960" height="500"></svg>
+            <!--<![endif]-->
         </div>
         <script src="map.js"></script>
     </body>
