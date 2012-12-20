@@ -53,16 +53,23 @@
     <head>
         <meta charset="utf-8">
         
-        <script src="r2d3.v2.js"></script>
-            
+         <script src="r2d3.v2.js"></script>
+         <script type="text/javascript">ie8 = true;</script>
+         
+         <!--[if !IE]>-->
+            <script src="d3.v2.js"></script>
+            <script type="text/javascript">
+                ie8 = false;
+            </script>
+         <!--<![endif]-->
         
         
         <link rel="stylesheet" type="text/css" href="map.css">
     </head>
     <body>
         <div id="mapContainer">
-            
+            <svg id="mapDrawArea" "width="960" height="500"></svg>
         </div>
-        <script src="map_ie8.js"></script>
+        <script src="map.js"></script>
     </body>
 </html>

@@ -13,8 +13,8 @@
         <link rel="stylesheet" type="text/css" href="map.css">
     </head>
     <body>
-        <div>
-            <svg width="960" height="500"></svg>
+        <div id="mapContainer"">
+            <svg id="mapDrawArea" "width="960" height="500"></svg>
         </div>
     </body>
 </html>
