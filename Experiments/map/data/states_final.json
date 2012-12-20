@@ -1,22 +1,26 @@
-{"type":"FeatureCollection", "features":[{
-    "code":"3",
-    "url":"http:\/\/www.stopbullying.gov\/laws\/alabama.html",
-    "type":"Feature",
-    "id":"01",
-    "properties":{
-        "name":"Alabama"
-    },
-    "geometry":{
-        "type":"Polygon",
+{
+    "type":"FeatureCollection",
+    "features":[{
+        "code":"3",
+        "url":"http:\/\/www.stopbullying.gov\/laws\/alabama.html",
+        "type":"Feature",
+        "id":"01",
+        "properties":{
+            "name":"Alabama",
+            "abbrev":"AL"
+        },
+        "geometry":{
+            "type":"Polygon",
             "coordinates":[[[-87.359296,35.00118],[-85.606675,34.984749],[-85.431413,34.124869],[-85.184951,32.859696],[-85.069935,32.580372],[-84.960397,32.421541],[-85.004212,32.322956],[-84.889196,32.262709],[-85.058981,32.13674],[-85.053504,32.01077],[-85.141136,31.840985],[-85.042551,31.539753],[-85.113751,31.27686],[-85.004212,31.003013],[-85.497137,30.997536],[-87.600282,30.997536],[-87.633143,30.86609],[-87.408589,30.674397],[-87.446927,30.510088],[-87.37025,30.427934],[-87.518128,30.280057],[-87.655051,30.247195],[-87.90699,30.411504],[-87.934375,30.657966],[-88.011052,30.685351],[-88.10416,30.499135],[-88.137022,30.318396],[-88.394438,30.367688],[-88.471115,31.895754],[-88.241084,33.796253],[-88.098683,34.891641],[-88.202745,34.995703],[-87.359296,35.00118]]]
-        }
-    },{
+            }
+        },{
     "code":"3",
     "url":"http:\/\/www.stopbullying.gov\/laws\/alaska.html",
     "type":"Feature",
     "id":"02",
     "properties":{
-        "name":"Alaska"
+        "name":"Alaska",
+        "abbrev":"AK"
     },
     "geometry":{
         "type":"MultiPolygon",
@@ -28,7 +32,8 @@
     "type":"Feature",
     "id":"04",
     "properties":{
-        "name":"Arizona"
+        "name":"Arizona",
+        "abbrev":"AZ"
     },
     "geometry":{
         "type":"Polygon",
@@ -40,7 +45,8 @@
     "type":"Feature",
     "id":"05",
     "properties":{
-        "name":"Arkansas"
+        "name":"Arkansas",
+        "abbrev":"AR"
     },
     "geometry":{
         "type":"Polygon",
@@ -52,7 +58,8 @@
     "type":"Feature",
     "id":"06",
     "properties":{
-        "name":"California"
+        "name":"California",
+        "abbrev":"CA"
     },
     "geometry":{
         "type":"Polygon",
@@ -64,7 +71,8 @@
     "type":"Feature",
     "id":"08",
     "properties":{
-        "name":"Colorado"
+        "name":"Colorado",
+        "abbrev":"CO"
     },
     "geometry":{
         "type":"Polygon",
@@ -76,7 +84,8 @@
     "type":"Feature",
     "id":"09",
     "properties":{
-        "name":"Connecticut"
+        "name":"Connecticut",
+        "abbrev":"CT"
     },
     "geometry":{
         "type":"Polygon",
@@ -88,7 +97,8 @@
     "type":"Feature",
     "id":"10",
     "properties":{
-        "name":"Delaware"
+        "name":"Delaware",
+        "abbrev":"DE"
     },
     "geometry":{
         "type":"Polygon",
@@ -100,7 +110,8 @@
     "type":"Feature",
     "id":"12",
     "properties":{
-        "name":"Florida"
+        "name":"Florida",
+        "abbrev":"FL"
     },
     "geometry":{
         "type":"Polygon",
@@ -112,7 +123,8 @@
     "type":"Feature",
     "id":"13",
     "properties":{
-        "name":"Georgia"
+        "name":"Georgia",
+        "abbrev":"GA"
     },
     "geometry":{
         "type":"Polygon",
@@ -124,7 +136,8 @@
     "type":"Feature",
     "id":"15",
     "properties":{
-        "name":"Hawaii"
+        "name":"Hawaii",
+        "abbrev":"HI"
     },
     "geometry":{
         "type":"MultiPolygon",
@@ -136,7 +149,8 @@
     "type":"Feature",
     "id":"16",
     "properties":{
-        "name":"Idaho"
+        "name":"Idaho",
+        "abbrev":"ID"
     },
     "geometry":{
         "type":"Polygon",
@@ -148,7 +162,8 @@
     "type":"Feature",
     "id":"17",
     "properties":{
-        "name":"Illinois"
+        "name":"Illinois",
+        "abbrev":"IL"
     },
     "geometry":{
         "type":"Polygon",
@@ -160,7 +175,8 @@
     "type":"Feature",
     "id":"18",
     "properties":{
-        "name":"Indiana"
+        "name":"Indiana",
+        "abbrev":"IN"
     },
     "geometry":{
         "type":"Polygon",
@@ -172,7 +188,8 @@
     "type":"Feature",
     "id":"19",
     "properties":{
-        "name":"Iowa"
+        "name":"Iowa",
+        "abbrev":"IA"
     },
     "geometry":{
         "type":"Polygon",
@@ -184,7 +201,8 @@
     "type":"Feature",
     "id":"20",
     "properties":{
-        "name":"Kansas"
+        "name":"Kansas",
+        "abbrev":"KS"
     },
     "geometry":{
         "type":"Polygon",
@@ -196,7 +214,8 @@
     "type":"Feature",
     "id":"21",
     "properties":{
-        "name":"Kentucky"
+        "name":"Kentucky",
+        "abbrev":"KY"
     },
     "geometry":{
         "type":"Polygon",
@@ -208,7 +227,8 @@
     "type":"Feature",
     "id":"22",
     "properties":{
-        "name":"Louisiana"
+        "name":"Louisiana",
+        "abbrev":"LA"
     },
     "geometry":{
         "type":"Polygon",
@@ -220,7 +240,8 @@
     "type":"Feature",
     "id":"23",
     "properties":{
-        "name":"Maine"
+        "name":"Maine",
+        "abbrev":"ME"
     },
     "geometry":{
         "type":"Polygon",
@@ -232,7 +253,8 @@
     "type":"Feature",
     "id":"24",
     "properties":{
-        "name":"Maryland"
+        "name":"Maryland",
+        "abbrev":"MD"
     },
     "geometry":{
         "type":"MultiPolygon",
@@ -244,7 +266,8 @@
     "type":"Feature",
     "id":"25",
     "properties":{
-        "name":"Massachusetts"
+        "name":"Massachusetts",
+        "abbrev":"MA"
     },
     "geometry":{
         "type":"Polygon",
@@ -256,7 +279,8 @@
     "type":"Feature",
     "id":"26",
     "properties":{
-        "name":"Michigan"
+        "name":"Michigan",
+        "abbrev":"MI"
     },
     "geometry":{
         "type":"MultiPolygon",
@@ -268,7 +292,8 @@
     "type":"Feature",
     "id":"27",
     "properties":{
-        "name":"Minnesota"
+        "name":"Minnesota",
+        "abbrev":"MN"
     },
     "geometry":{
         "type":"Polygon",
@@ -280,7 +305,8 @@
     "type":"Feature",
     "id":"28",
     "properties":{
-        "name":"Mississippi"
+        "name":"Mississippi",
+        "abbrev":"MS"
     },
     "geometry":{
         "type":"Polygon",
@@ -292,7 +318,8 @@
     "type":"Feature",
     "id":"29",
     "properties":{
-        "name":"Missouri"
+        "name":"Missouri",
+        "abbrev":"MO"
     },
     "geometry":{
         "type":"Polygon",
@@ -304,7 +331,8 @@
     "type":"Feature",
     "id":"30",
     "properties":{
-        "name":"Montana"
+        "name":"Montana",
+        "abbrev":"MT"
     },
     "geometry":{
         "type":"Polygon",
@@ -316,7 +344,8 @@
     "type":"Feature",
     "id":"31",
     "properties":{
-        "name":"Nebraska"
+        "name":"Nebraska",
+        "abbrev":"NE"
     },
     "geometry":{
         "type":"Polygon",
@@ -328,7 +357,8 @@
     "type":"Feature",
     "id":"32",
     "properties":{
-        "name":"Nevada"
+        "name":"Nevada",
+        "abbrev":"NV"
     },
     "geometry":{
         "type":"Polygon",
@@ -340,7 +370,8 @@
     "type":"Feature",
     "id":"33",
     "properties":{
-        "name":"New Hampshire"
+        "name":"New Hampshire",
+        "abbrev":"NH"
     },
     "geometry":{
         "type":"Polygon",
@@ -352,7 +383,8 @@
     "type":"Feature",
     "id":"34",
     "properties":{
-        "name":"New Jersey"
+        "name":"New Jersey",
+        "abbrev":"NJ"
     },
     "geometry":{
         "type":"Polygon",
@@ -364,7 +396,8 @@
     "type":"Feature",
     "id":"35",
     "properties":{
-        "name":"New Mexico"
+        "name":"New Mexico",
+        "abbrev":"NM"
     },
     "geometry":{
         "type":"Polygon",
@@ -376,7 +409,8 @@
     "type":"Feature",
     "id":"36",
     "properties":{
-        "name":"New York"
+        "name":"New York",
+        "abbrev":"NY"
     },
     "geometry":{
         "type":"Polygon",
@@ -388,7 +422,8 @@
     "type":"Feature",
     "id":"37",
     "properties":{
-        "name":"North Carolina"
+        "name":"North Carolina",
+        "abbrev":"NC"
     },
     "geometry":{
         "type":"Polygon",
@@ -400,7 +435,8 @@
     "type":"Feature",
     "id":"38",
     "properties":{
-        "name":"North Dakota"
+        "name":"North Dakota",
+        "abbrev":"ND"
     },
     "geometry":{
         "type":"Polygon",
@@ -412,7 +448,8 @@
     "type":"Feature",
     "id":"39",
     "properties":{
-        "name":"Ohio"
+        "name":"Ohio",
+        "abbrev":"OH"
     },
     "geometry":{
         "type":"Polygon",
@@ -424,7 +461,8 @@
     "type":"Feature",
     "id":"40",
     "properties":{
-        "name":"Oklahoma"
+        "name":"Oklahoma",
+        "abbrev":"OK"
     },
     "geometry":{
         "type":"Polygon",
@@ -436,7 +474,8 @@
     "type":"Feature",
     "id":"41",
     "properties":{
-        "name":"Oregon"
+        "name":"Oregon",
+        "abbrev":"OR"
     },
     "geometry":{
         "type":"Polygon",
@@ -448,7 +487,8 @@
     "type":"Feature",
     "id":"42",
     "properties":{
-        "name":"Pennsylvania"
+        "name":"Pennsylvania",
+        "abbrev":"PA"
     },
     "geometry":{
         "type":"Polygon",
@@ -460,7 +500,8 @@
     "type":"Feature",
     "id":"44",
     "properties":{
-        "name":"Rhode Island"
+        "name":"Rhode Island",
+        "abbrev":"RI"
     },
     "geometry":{
         "type":"MultiPolygon",
@@ -472,7 +513,8 @@
     "type":"Feature",
     "id":"45",
     "properties":{
-        "name":"South Carolina"
+        "name":"South Carolina",
+        "abbrev":"SC"
     },
     "geometry":{
         "type":"Polygon",
@@ -484,7 +526,8 @@
     "type":"Feature",
     "id":"46",
     "properties":{
-        "name":"South Dakota"
+        "name":"South Dakota",
+        "abbrev":"SD"
     },
     "geometry":{
         "type":"Polygon",
@@ -496,7 +539,8 @@
     "type":"Feature",
     "id":"47",
     "properties":{
-        "name":"Tennessee"
+        "name":"Tennessee",
+        "abbrev":"TN"
     },
     "geometry":{
         "type":"Polygon",
@@ -508,7 +552,8 @@
     "type":"Feature",
     "id":"48",
     "properties":{
-        "name":"Texas"
+        "name":"Texas",
+        "abbrev":"TX"
     },
     "geometry":{
         "type":"Polygon",
@@ -520,7 +565,8 @@
     "type":"Feature",
     "id":"49",
     "properties":{
-        "name":"Utah"
+        "name":"Utah",
+        "abbrev":"UT"
     },
     "geometry":{
         "type":"Polygon",
@@ -532,7 +578,8 @@
     "type":"Feature",
     "id":"50",
     "properties":{
-        "name":"Vermont"
+        "name":"Vermont",
+        "abbrev":"VT"
     },
     "geometry":{
         "type":"Polygon",
@@ -544,7 +591,8 @@
     "type":"Feature",
     "id":"51",
     "properties":{
-        "name":"Virginia"
+        "name":"Virginia",
+        "abbrev":"VA"
     },
     "geometry":{
         "type":"MultiPolygon",
@@ -556,7 +604,8 @@
     "type":"Feature",
     "id":"53",
     "properties":{
-        "name":"Washington"
+        "name":"Washington",
+        "abbrev":"WA"
     },
     "geometry":{
         "type":"MultiPolygon",
@@ -568,7 +617,8 @@
     "type":"Feature",
     "id":"54",
     "properties":{
-        "name":"West Virginia"
+        "name":"West Virginia",
+        "abbrev":"WV"
     },
     "geometry":{
         "type":"Polygon",
@@ -580,7 +630,8 @@
     "type":"Feature",
     "id":"55",
     "properties":{
-        "name":"Wisconsin"
+        "name":"Wisconsin",
+        "abbrev":"WI"
     },
     "geometry":{
         "type":"Polygon",
@@ -592,7 +643,8 @@
     "type":"Feature",
     "id":"56",
     "properties":{
-        "name":"Wyoming"
+        "name":"Wyoming",
+        "abbrev":"WY"
     },
     "geometry":{
         "type":"Polygon",
