@@ -1,7 +1,6 @@
 <?php
 
     /*Stuff left to do:
-        Add blocks to select small states
         Add map key
         Add state acronyms to map*/
 

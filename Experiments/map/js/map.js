@@ -25,6 +25,8 @@ $(document).ready(function() {
         boxesHeight:25,
         boxesXPadding:2,
         boxesYPadding:2,
+        JSONresults:null,
+        d3Selection: null,
                 
         stateBoxIDs:  ["09", "10", "25", "24", "33", "34", "44", "50"],
         sBoxes: [],
@@ -33,12 +35,13 @@ $(document).ready(function() {
 
             var position, currentState;
             var map = this;
-
-            var drawMap = d3.select('#mapContainer').append('svg')
+            map.d3Selection = d3.select('#mapContainer');
+            var drawMap = map.d3Selection.append('svg')
                 .attr("width", 960)
                 .attr("height", 500);
 
              d3.json("data/states_final.json", function(collection) {
+                map.JSONresults = collection.features;
                 $.each(collection.features, function(){
                     currentState = this;
                     position = $.inArray(currentState.id, map.stateBoxIDs);
@@ -56,7 +59,6 @@ $(document).ready(function() {
                     .on("click", map.stateClick)
                     .on("mouseover", map.hoverOnState)
                     .on("mouseout", map.hoverOutState);
-                    
                 map.drawSBoxes(drawMap);
             });
         },
@@ -80,6 +82,7 @@ $(document).ready(function() {
             }
             currentBox.code = code;
             currentBox.url = url;
+            currentBox.originID = stateID;
             
             this.sBoxes.push(currentBox);
         },
@@ -95,9 +98,30 @@ $(document).ready(function() {
                 .attr("height", that.boxesHeight)
                 .attr("width", that.boxesWidth)
                 .style("fill", that.fillStates)
-                .on("click", that.stateClick)
-                .on("mouseover", that.hoverOnState)
-                .on("mouseout", that.hoverOutState);
+                .on("click", that.stateClick)  
+                .on("mouseover", function(e){
+                    var currentBox = this;
+                    var pathToFill = that.d3Selection.selectAll('svg path').filter(function(i,d){
+                        if(e.originID == i.id)
+                            return this;
+                    });
+                    that.hoverOnState(null,null,pathToFill[0][0]);
+                    that.hoverOnState(null,null,currentBox);
+                })
+                .on("mouseout", function(e){
+                    var pathToFill,
+                        currentBox = this,
+                        d;
+
+                    that.d3Selection.selectAll('svg path').filter(function(i,dat){
+                        if(e.originID == i.id){
+                            pathToFill = this;
+                            d = i;
+                        }
+                    });
+                    that.hoverOutState(d, null, pathToFill);
+                    that.hoverOutState(d, null, currentBox);
+                });
                 
 //            drawMap.append('text')
 //                .style("color", "black")
@@ -112,11 +136,21 @@ $(document).ready(function() {
             
             return false;
         },
-        hoverOnState: function(d){
-            d3.select(this).style("fill", "yellow");
+        hoverOnState: function(d,i,element){
+            var target;
+            
+            if(element) target = element;
+            else target = this;
+
+            d3.select(target).style("fill", "yellow");
         },
-        hoverOutState: function(d){
-            d3.select(this).style("fill", d3Map.fillStates(d));
+        hoverOutState: function(d, i, element){
+            var target;
+            
+            if(element) target = element;
+            else target = this;
+            
+            d3.select(target).style("fill", d3Map.fillStates(d));
         },
         stateClick: function (d){
             window.open(d.url);
