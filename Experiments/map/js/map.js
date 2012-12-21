@@ -31,6 +31,10 @@ $(document).ready(function() {
         stateBoxIDs:  ["09", "10", "25", "24", "33", "34", "44", "50"],
         sBoxes: [],
         
+        legend:    [{x:830, y:400},
+                    {x:830, y:430},
+                    {x:830, y:460}],
+        
         init: function() {
 
             var position, currentState;
@@ -83,6 +87,7 @@ $(document).ready(function() {
             currentBox.code = code;
             currentBox.url = url;
             currentBox.originID = stateID;
+            currentBox.abbrev = abbrev;
             
             this.sBoxes.push(currentBox);
         },
@@ -97,6 +102,7 @@ $(document).ready(function() {
                 .attr("y", function(index){return index.y})
                 .attr("height", that.boxesHeight)
                 .attr("width", that.boxesWidth)
+                .classed(["stateBox"])
                 .style("fill", that.fillStates)
                 .on("click", that.stateClick)  
                 .on("mouseover", function(e){
@@ -112,7 +118,6 @@ $(document).ready(function() {
                     var pathToFill,
                         currentBox = this,
                         d;
-
                     that.d3Selection.selectAll('svg path').filter(function(i,dat){
                         if(e.originID == i.id){
                             pathToFill = this;
@@ -123,10 +128,19 @@ $(document).ready(function() {
                     that.hoverOutState(d, null, currentBox);
                 });
                 
-//            drawMap.append('text')
-//                .style("color", "black")
-//                .attr("transform", "translate(" + 100 + ",100)")
-//                .text("Bob");
+//            drawMap.append("rect")
+//                .data(d3Map.legend)
+//                .enter().append("rect")
+//                .attr("x", function(index){return index.x})
+//                .attr("y", function(index){return index.y})
+//                .attr("height", that.boxesHeight)
+//                .attr("width", that.boxesWidth);
+                
+            drawMap.selectAll('rect').enter().append('text')
+                    .style("color", "black")
+                    .attr("transform", "translate(" + 100 + ",100)")
+                    .text("Bob");
+            
         },
         
         fillStates: function(d){
@@ -135,6 +149,9 @@ $(document).ready(function() {
             else if(d.code == 1) return "green";
             
             return false;
+        },
+        fillAbbrevs: function(d){
+            
         },
         hoverOnState: function(d,i,element){
             var target;
@@ -151,6 +168,9 @@ $(document).ready(function() {
             else target = this;
             
             d3.select(target).style("fill", d3Map.fillStates(d));
+        },
+        hoverOnBox: function(e){
+            
         },
         stateClick: function (d){
             window.open(d.url);
