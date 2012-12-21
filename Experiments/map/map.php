@@ -1,8 +1,10 @@
 <?php
 
-    /*Stuff left to do:
-        Add map key
-        Add state acronyms to map*/
+    /*
+     * Known issues:
+     * 
+     * Text misaligned in IE8
+     */
 
 //function chStateName($name, $to='abbrev') {
 //    

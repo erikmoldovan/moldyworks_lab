@@ -31,9 +31,9 @@ $(document).ready(function() {
         stateBoxIDs:  ["09", "10", "25", "24", "33", "34", "44", "50"],
         sBoxes: [],
         
-        legend:    [{x:830, y:400},
-                    {x:830, y:430},
-                    {x:830, y:460}],
+        legend:    [{x:840, y:360, key:"Law Only", code:1},
+                    {x:840, y:390, key:"Policy Only", code:2},
+                    {x:840, y:420, key:"Both Law and Policy", code:3}],
         
         init: function() {
 
@@ -55,7 +55,7 @@ $(document).ready(function() {
                 })
                 var z ={}; z.code = '3';
                  
-                drawMap.selectAll("path")
+                drawMap.selectAll(".states")
                     .data(collection.features)
                     .enter().append("path")
                     .attr("d", d3.geo.path().projection(d3.geo.albersUsa()))
@@ -64,6 +64,7 @@ $(document).ready(function() {
                     .on("mouseover", map.hoverOnState)
                     .on("mouseout", map.hoverOutState);
                 map.drawSBoxes(drawMap);
+                map.drawMapKey(drawMap);
             });
         },
 
@@ -95,15 +96,15 @@ $(document).ready(function() {
         drawSBoxes: function(drawMap){
             var that = this,
             stateboxes = this.sBoxes;
-            drawMap.selectAll("rect")
+            drawMap.selectAll(".stateBox")
                 .data(stateboxes)
                 .enter().append("rect")
                 .attr("x", function(index){return index.x})
                 .attr("y", function(index){return index.y})
                 .attr("height", that.boxesHeight)
                 .attr("width", that.boxesWidth)
-                .classed(["stateBox"])
                 .style("fill", that.fillStates)
+                .text(function(index){return index.abbrev})
                 .on("click", that.stateClick)  
                 .on("mouseover", function(e){
                     var currentBox = this;
@@ -128,19 +129,38 @@ $(document).ready(function() {
                     that.hoverOutState(d, null, currentBox);
                 });
                 
-//            drawMap.append("rect")
-//                .data(d3Map.legend)
-//                .enter().append("rect")
-//                .attr("x", function(index){return index.x})
-//                .attr("y", function(index){return index.y})
-//                .attr("height", that.boxesHeight)
-//                .attr("width", that.boxesWidth);
-                
-            drawMap.selectAll('rect').enter().append('text')
-                    .style("color", "black")
-                    .attr("transform", "translate(" + 100 + ",100)")
-                    .text("Bob");
+            drawMap.selectAll(".stateAbbrev")
+                .data(stateboxes)
+                .enter().append("svg:text")
+                    .attr("x", function(index){return index.x + 15;})
+                    .attr("y", function(index){return index.y + 18;})
+                    .style("font-size", "14px")
+                    .attr("fill", "white")
+                    .attr("font-weight", "bold")
+                    .text(function(index){return index.abbrev});
+        },
+        
+        drawMapKey: function(drawMap){
+            var that = this,
+            mapKey = this.legend;
             
+            drawMap.selectAll(".keyBlob")
+                .data(mapKey)
+                .enter().append("circle")
+                    .attr("cx", function(index){return index.x})
+                    .attr("cy", function(index){return index.y})
+                    .attr("r", "10")
+                    .attr("height", that.boxesHeight)
+                    .attr("width", that.boxesWidth)
+                    .style("fill", that.fillStates);
+                    
+            drawMap.selectAll(".keyText")
+                .data(mapKey)
+                .enter().append("svg:text")
+                    .attr("x", f 14})
+                    .attr("y", function(index){return index.y + 5})
+                    .style("font-size", "14px")
+                    .text(function(index){return index.key});
         },
         
         fillStates: function(d){
@@ -150,9 +170,7 @@ $(document).ready(function() {
             
             return false;
         },
-        fillAbbrevs: function(d){
-            
-        },
+        
         hoverOnState: function(d,i,element){
             var target;
             
@@ -161,6 +179,7 @@ $(document).ready(function() {
 
             d3.select(target).style("fill", "yellow");
         },
+        
         hoverOutState: function(d, i, element){
             var target;
             
@@ -169,12 +188,9 @@ $(document).ready(function() {
             
             d3.select(target).style("fill", d3Map.fillStates(d));
         },
-        hoverOnBox: function(e){
-            
-        },
+        
         stateClick: function (d){
             window.open(d.url);
         }
     };
-
 });
