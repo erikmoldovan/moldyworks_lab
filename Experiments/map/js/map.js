@@ -38,9 +38,12 @@ $(document).ready(function() {
         
         init: function() {
 
+            $('#mapContainer').prepend($('<div id="stateName"></div>'));
+
             var position, currentState;
             var map = this;
             map.d3Selection = d3.select('#mapContainer');
+
             var drawMap = map.d3Selection.append('svg')
                 .attr("width", 960)
                 .attr("height", 500);
@@ -54,8 +57,7 @@ $(document).ready(function() {
                         map.getSBoxesValues(currentState, parseInt(position));
                     }
                 })
-                var z ={}; z.code = '3';
-                 
+
                 drawMap.selectAll(".states")
                     .data(collection.features)
                     .enter().append("path")
@@ -64,9 +66,9 @@ $(document).ready(function() {
                     .on("click", map.stateClick)
                     .on("mouseover", map.hoverOnState)
                     .on("mouseout", map.hoverOutState);
+
                 map.drawSBoxes(drawMap);
                 map.drawMapKey(drawMap);
-                map.drawTooltip(drawMap);
             });
         },
 
@@ -74,7 +76,8 @@ $(document).ready(function() {
             var stateID = originalState.id,
                 abbrev = originalState.properties.abbrev,
                 code = originalState.code,
-                url = originalState.url;
+                url = originalState.url,
+                name = originalState.properties.name;
             
             var currentBox = {};
             var isEven = posID % 2 == 0;
@@ -91,6 +94,7 @@ $(document).ready(function() {
             currentBox.url = url;
             currentBox.originID = stateID;
             currentBox.abbrev = abbrev;
+            currentBox.name = name;
             
             this.sBoxes.push(currentBox);
         },
@@ -115,9 +119,10 @@ $(document).ready(function() {
                         if(e.originID == i.id)
                             return this;
                     });
-                    that.hoverOnState(null,null,pathToFill[0][0]);
-                    that.hoverOnState(null,null,currentBox);
-                    that.hoverOnText(null,null,currentText);
+
+                    that.hoverOnState(stateboxes[0],null,pathToFill[0][0]);
+                    that.hoverOnState(stateboxes[0],null,currentBox);
+                    that.hoverOnText(stateboxes[0],null,currentText);
                 })
                 .on("mouseout", function(e){
                     var currentText = $('text')[getNumInDom(this,'rect')];
@@ -144,16 +149,17 @@ $(document).ready(function() {
                     .attr("fill", "white")
                     .attr("font-weight", "bold")
                     .text(function(index){return index.abbrev})
-                .on("click", that.stateClick) 
+                    .on("click", that.stateClick)
                     .on("mouseover", function(e){
                         var currentBox = $('rect')[getNumInDom(this,'text')];
                         var pathToFill = that.d3Selection.selectAll('svg path').filter(function(i,d){
                             if(e.originID == i.id)
                                 return this;
                         });
-                        that.hoverOnState(null,null,pathToFill[0][0]);
-                        that.hoverOnState(null,null,currentBox);
-                        that.hoverOnText(null,null,this);
+
+                        that.hoverOnState(stateboxes[0],null,pathToFill[0][0]);
+                        that.hoverOnState(stateboxes[0],null,currentBox);
+                        that.hoverOnText(stateboxes[0],null,this);
                     })
                     .on("mouseout", function(e){
                         var pathToFill,
@@ -194,29 +200,6 @@ $(document).ready(function() {
                     .text(function(index){return index.key});
         },
         
-        drawTooltip: function(drawMap){
-            var that = this,
-            mapKey = this.legend;
-            
-            drawMap.selectAll(".keyBlob")
-                .data(mapKey)
-                .enter().append("circle")
-                    .attr("cx", function(index){return index.x})
-                    .attr("cy", function(index){return index.y})
-                    .attr("r", "10")
-                    .attr("height", that.boxesHeight)
-                    .attr("width", that.boxesWidth)
-                    .style("fill", that.fillStates);
-                    
-            drawMap.selectAll(".keyText")
-                .data(mapKey)
-                .enter().append("svg:text")
-                    .attr("x", function(index){return index.x + d3Map.textX + 16}) // R2D3 and D3 treat X/Y differently
-                    .attr("y", function(index){return index.y + 5})
-                    .style("font-size", "14px")
-                    .text(function(index){return index.key});
-        },
-        
         fillStates: function(d){
             if(d.code == 3) return "blue";
             else if(d.code == 2) return "red";
@@ -234,6 +217,20 @@ $(document).ready(function() {
             d3.select(target)
                 .style("fill", "yellow")
                 .style("cursor", "hand");
+
+            if(d.name) stateName = d.name;
+            else stateName = d.properties.name;
+
+            $('#stateName').text(stateName);
+            var statePolicy;
+
+            switch(d.code){
+                case '1': statePolicy = "Law Only"; break;
+                case '2': statePolicy = "Policy Only"; break;
+                case '3': statePolicy = "Both Law and Policy"; break;
+            }
+
+            $('#stateName').append("<br/>" + statePolicy);
         },
         
         hoverOnText: function(d,i,element){
@@ -245,6 +242,20 @@ $(document).ready(function() {
             d3.select(target)
                 .style("fill", "blue")
                 .style("cursor", "hand");
+
+            if(d.name) stateName = d.name;
+            else stateName = d.properties.name;
+
+            $('#stateName').text(stateName);
+            var statePolicy;
+
+            switch(d.code){
+                case '1': statePolicy = "Law Only"; break;
+                case '2': statePolicy = "Policy Only"; break;
+                case '3': statePolicy = "Both Law and Policy"; break;
+            }
+
+            $('#stateName').append("<br/>" + statePolicy);
         },
         
         hoverOutText: function(d, i, element){
@@ -254,6 +265,7 @@ $(document).ready(function() {
             else target = this;
             
             d3.select(target).style("fill","white");
+            $('#stateName').text('');
         },
         
         hoverOutState: function(d, i, element){
@@ -263,6 +275,7 @@ $(document).ready(function() {
             else target = this;
             
             d3.select(target).style("fill", d3Map.fillStates(d));
+            $('#stateName').text('');
         },
         
         stateClick: function (d){

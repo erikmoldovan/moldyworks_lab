@@ -7,3 +7,21 @@ path {
     stroke: #fff;
     stroke-width: 1px;
 }
+
+#mapContainer{
+    width:960px;
+}
+
+#stateName{
+    position: relative;
+    left: 40px;
+    top: 4px;
+    height:24px;
+    font-size: 24px;;
+    text-align: center;
+}
+
+#mapContainer svg{
+    position: absolute;
+    top: 32px;
+}
