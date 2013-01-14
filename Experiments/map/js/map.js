@@ -12,7 +12,8 @@ $(document).ready(function() {
         test: Modernizr.svg,
         yep : 'lib/d3.v2.js',
         nope: 'lib/r2d3.v2.js',
-        complete: function() {
+        complete: function() {          
+            d3Map.textX  = Modernizr.svg ? 0 : 44;
             d3Map.init();
         }
     });
@@ -26,14 +27,14 @@ $(document).ready(function() {
         boxesXPadding:2,
         boxesYPadding:2,
         JSONresults:null,
-        d3Selection: null,
+        d3Selection:null,
                 
-        stateBoxIDs:  ["09", "10", "25", "24", "33", "34", "44", "50"],
-        sBoxes: [],
+        stateBoxIDs:["09", "10", "25", "24", "33", "34", "44", "50"],
+        sBoxes:[],
         
-        legend:    [{x:840, y:360, key:"Law Only", code:1},
-                    {x:840, y:390, key:"Policy Only", code:2},
-                    {x:840, y:420, key:"Both Law and Policy", code:3}],
+        legend:[{x:830, y:360, key:"Law Only", code:1},
+                {x:830, y:390, key:"Policy Only", code:2},
+                {x:830, y:420, key:"Law & Policy", code:3}],
         
         init: function() {
 
@@ -65,6 +66,7 @@ $(document).ready(function() {
                     .on("mouseout", map.hoverOutState);
                 map.drawSBoxes(drawMap);
                 map.drawMapKey(drawMap);
+                map.drawTooltip(drawMap);
             });
         },
 
@@ -104,9 +106,10 @@ $(document).ready(function() {
                 .attr("height", that.boxesHeight)
                 .attr("width", that.boxesWidth)
                 .style("fill", that.fillStates)
-                .text(function(index){return index.abbrev})
                 .on("click", that.stateClick)  
                 .on("mouseover", function(e){
+                    var currentText = $('text')[getNumInDom(this,'rect')];
+                    
                     var currentBox = this;
                     var pathToFill = that.d3Selection.selectAll('svg path').filter(function(i,d){
                         if(e.originID == i.id)
@@ -114,8 +117,10 @@ $(document).ready(function() {
                     });
                     that.hoverOnState(null,null,pathToFill[0][0]);
                     that.hoverOnState(null,null,currentBox);
+                    that.hoverOnText(null,null,currentText);
                 })
                 .on("mouseout", function(e){
+                    var currentText = $('text')[getNumInDom(this,'rect')];
                     var pathToFill,
                         currentBox = this,
                         d;
@@ -127,6 +132,7 @@ $(document).ready(function() {
                     });
                     that.hoverOutState(d, null, pathToFill);
                     that.hoverOutState(d, null, currentBox);
+                    that.hoverOutText(d,null,currentText);
                 });
                 
             drawMap.selectAll(".stateAbbrev")
@@ -134,10 +140,35 @@ $(document).ready(function() {
                 .enter().append("svg:text")
                     .attr("x", function(index){return index.x + 15;})
                     .attr("y", function(index){return index.y + 18;})
-                    .style("font-size", "14px")
+                    .style("font-size", "10px")
                     .attr("fill", "white")
                     .attr("font-weight", "bold")
-                    .text(function(index){return index.abbrev});
+                    .text(function(index){return index.abbrev})
+                .on("click", that.stateClick) 
+                    .on("mouseover", function(e){
+                        var currentBox = $('rect')[getNumInDom(this,'text')];
+                        var pathToFill = that.d3Selection.selectAll('svg path').filter(function(i,d){
+                            if(e.originID == i.id)
+                                return this;
+                        });
+                        that.hoverOnState(null,null,pathToFill[0][0]);
+                        that.hoverOnState(null,null,currentBox);
+                        that.hoverOnText(null,null,this);
+                    })
+                    .on("mouseout", function(e){
+                        var pathToFill,
+                            currentBox = $('rect')[getNumInDom(this,'text')],
+                            d;
+                        that.d3Selection.selectAll('svg path').filter(function(i,dat){
+                            if(e.originID == i.id){
+                                pathToFill = this;
+                                d = i;
+                            }
+                        });
+                        that.hoverOutState(d, null, pathToFill);
+                        that.hoverOutState(d, null, currentBox);
+                        that.hoverOutText(d, null, this);
+                    });
         },
         
         drawMapKey: function(drawMap){
@@ -157,7 +188,30 @@ $(document).ready(function() {
             drawMap.selectAll(".keyText")
                 .data(mapKey)
                 .enter().append("svg:text")
-                    .attr("x", f 14})
+                    .attr("x", function(index){return index.x + d3Map.textX + 16}) // R2D3 and D3 treat X/Y differently
+                    .attr("y", function(index){return index.y + 5})
+                    .style("font-size", "14px")
+                    .text(function(index){return index.key});
+        },
+        
+        drawTooltip: function(drawMap){
+            var that = this,
+            mapKey = this.legend;
+            
+            drawMap.selectAll(".keyBlob")
+                .data(mapKey)
+                .enter().append("circle")
+                    .attr("cx", function(index){return index.x})
+                    .attr("cy", function(index){return index.y})
+                    .attr("r", "10")
+                    .attr("height", that.boxesHeight)
+                    .attr("width", that.boxesWidth)
+                    .style("fill", that.fillStates);
+                    
+            drawMap.selectAll(".keyText")
+                .data(mapKey)
+                .enter().append("svg:text")
+                    .attr("x", function(index){return index.x + d3Map.textX + 16}) // R2D3 and D3 treat X/Y differently
                     .attr("y", function(index){return index.y + 5})
                     .style("font-size", "14px")
                     .text(function(index){return index.key});
@@ -177,7 +231,29 @@ $(document).ready(function() {
             if(element) target = element;
             else target = this;
 
-            d3.select(target).style("fill", "yellow");
+            d3.select(target)
+                .style("fill", "yellow")
+                .style("cursor", "hand");
+        },
+        
+        hoverOnText: function(d,i,element){
+            var target;
+            
+            if(element) target = element;
+            else target = this;
+
+            d3.select(target)
+                .style("fill", "blue")
+                .style("cursor", "hand");
+        },
+        
+        hoverOutText: function(d, i, element){
+            var target;
+            
+            if(element) target = element;
+            else target = this;
+            
+            d3.select(target).style("fill","white");
         },
         
         hoverOutState: function(d, i, element){
@@ -194,3 +270,7 @@ $(document).ready(function() {
         }
     };
 });
+
+function getNumInDom(element, selector){
+    return $.inArray(element,$(selector));
+}
