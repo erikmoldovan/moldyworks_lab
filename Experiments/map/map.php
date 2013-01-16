@@ -147,7 +147,9 @@
         <link rel="stylesheet" type="text/css" href="css/map.css"></link>
     </head>
     <body>
-        <div id="stateName"></div>
-        <div id="mapContainer"></div>
+        <div id="pBody">
+            <div id="stateName"></div>
+            <div id="mapContainer"></div>
+         </div>
     </body>
 </html>

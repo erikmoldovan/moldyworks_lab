@@ -1,33 +1,18 @@
-body {
-    background-color: #ccc;
+#pBody {
     width:960px;
 }
 
-path {
-    fill: #ccc;
-    stroke: #fff;
-    stroke-width: 1px;
+#mapContainer {
+    height: 480px;
+}
+
+path, rect, text {
     cursor: pointer;
 }
 
-rect {
-    cursor: pointer;
-}
-
-#mapContainer{
-    width:960px;
-}
-
-#stateName{
-    position: relative;
-    left: 40px;
+#stateName {
     top: 4px;
     height:24px;
     font-size: 24px;;
     text-align: center;
-}
-
-#mapContainer svg{
-    position: absolute;
-    top: 32px;
 }

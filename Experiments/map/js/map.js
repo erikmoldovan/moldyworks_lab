@@ -20,8 +20,6 @@ $(document).ready(function() {
 
     var d3Map = {
 
-        mapWidth:1000,
-        mapHeight:500,
         boxesLeft:830,
         boxesTop:173,
         boxesWidth:48,
@@ -30,24 +28,49 @@ $(document).ready(function() {
         boxesYPadding:2,
         JSONresults:null,
         d3Selection:null,
-                
+        lawContainer:{key:"Law Only", code:1, color:"green"},
+        policyContainer:{key:"Policy Only", code:2, color:"red"},
+        bothContainer:{key:"Law & Policy", code:3, color:"blue"},
+        highlightColor:"yellow",
+        pathColor:"white",
+        pathWidth:"1px",
+
         stateBoxIDs:["09", "10", "11", "25", "24", "33", "34", "44", "50", "57"],
         sBoxes:[],
-        
-        legend:[{x:830, y:360, key:"Law Only", code:1, color:"green"},
-                {x:830, y:390, key:"Policy Only", code:2, color:"red"},
-                {x:830, y:420, key:"Law & Policy", code:3, color:"blue"}],
+
+        legend:[{x:830, y:360}, {x:830, y:390}, {x:830, y:420}],
 
         // Draws the map with the initial values loaded from JSON
         init: function() {
-
             var position, currentState;
             var that = this;
+
+            // Abstracted color assignment for dynamic admin purposes
+            for(i = 0; i < that.legend.length; i++){
+                container = {};
+
+                switch(i){
+                    case 0:
+                        container = that.lawContainer;
+                        break;
+                    case 1:
+                        container = that.policyContainer;
+                        break;
+                    case 2:
+                        container = that.bothContainer;
+                        break;
+                }
+
+                that.legend[i].key = container.key;
+                that.legend[i].code = container.code;
+                that.legend[i].color = container.color;
+            }
+
             that.d3Selection = d3.select('#mapContainer');
 
             var drawMap = that.d3Selection.append('svg')
-                .attr("width", that.mapWidth)
-                .attr("height", that.mapHeight);
+                .attr("width", '100%')
+                .attr("height", '100%');
 
              d3.json("data/states_final.json", function(collection) {
                 that.JSONresults = collection.features;
@@ -62,8 +85,10 @@ $(document).ready(function() {
                 drawMap.selectAll(".states")
                     .data(collection.features)
                     .enter().append("path")
-                    .attr("d", d3.geo.path().projection(d3.geo.albersUsa().scale([1000])))
+                    .attr("d", d3.geo.path().projection(d3.geo.albersUsa().scale([$('#mapContainer').width()])))
                     .style("fill", that.fillStates)
+                    .style("stroke", that.pathColor)
+                    .style("stroke-width", that.pathWidth)
                     .on("click", that.stateClick)
                     .on("mouseover", that.hoverOnState)
                     .on("mouseout", that.hoverOutState);
@@ -75,29 +100,22 @@ $(document).ready(function() {
 
         // Creates a streamlined array for use in filling in the stateboxes on the right side of the map
         getSBoxesValues: function(originalState, posID){
-            var stateID = originalState.id,
-                abbrev = originalState.properties.abbrev,
-                code = originalState.code,
-                url = originalState.url,
-                name = originalState.properties.name;
-            
             var currentBox = {};
-            var isEven = posID % 2 == 0;
+
+            currentBox.code = originalState.code;
+            currentBox.url = originalState.url;
+            currentBox.originID = originalState.id;
+            currentBox.abbrev = originalState.properties.abbrev;
+            currentBox.name = originalState.properties.name;
             
-            if(isEven){
+            if(posID % 2 == 0){
                 currentBox.x = this.boxesLeft;
                 currentBox.y = this.boxesTop + ((this.boxesHeight + this.boxesYPadding)*(posID/2))
             }
-            if (!isEven){
-                currentBox.x = this.boxesLeft + this.boxesWidth + this.boxesXPadding; 
+            else{
+                currentBox.x = this.boxesLeft + this.boxesWidth + this.boxesXPadding;
                 currentBox.y = this.boxesTop + ((this.boxesHeight + this.boxesYPadding)*((posID-1)/2))
             }
-
-            currentBox.code = code;
-            currentBox.url = url;
-            currentBox.originID = stateID;
-            currentBox.abbrev = abbrev;
-            currentBox.name = name;
 
             this.sBoxes.push(currentBox);
         },
@@ -130,9 +148,9 @@ $(document).ready(function() {
                     var sID = this.id;
                     if(sID >= 50){sID -= 50}; // Also required by IE
 
-                    that.hoverOnState(stateboxes[sID],null,pathToFill[0][0]); // Fills State
-                    that.hoverOnState(stateboxes[sID],null,currentBox); // Fills Box
-                    that.hoverOnText(stateboxes[sID],null,currentText); // Fills State and Box when hovering on text
+                    that.hoverOnState(stateboxes[sID], null, pathToFill[0][0]); // Fills State
+                    that.hoverOnState(stateboxes[sID], null, currentBox); // Fills Box
+                    that.hoverOnText(stateboxes[sID], null, currentText); // Fills State and Box when hovering on text
                 })
                 .on("mouseout", function(e){
                     var currentText = $('text')[getNumInDom(this,'rect')];
@@ -147,7 +165,7 @@ $(document).ready(function() {
                     });
                     that.hoverOutState(d, null, pathToFill);
                     that.hoverOutState(d, null, currentBox);
-                    that.hoverOutText(d,null,currentText);
+                    that.hoverOutText(d, null, currentText);
                 });
 
             // Fills in text within stateboxes
@@ -157,7 +175,7 @@ $(document).ready(function() {
                     .attr("x", function(index){return index.x + 15;})
                     .attr("y", function(index){return index.y + 18;})
                     .style("font-size", "10px")
-                    .style("fill", "white")
+                    .style("fill", that.pathColor)
                     .attr("font-weight", "bold")
                     .attr("id", that.fillAID)
                     .text(function(index){return index.abbrev})
@@ -172,9 +190,9 @@ $(document).ready(function() {
                         var sID = this.id;
                         if(sID >= 58){sID -= 58}; // Also required by IE
 
-                        that.hoverOnState(stateboxes[sID],null,pathToFill[0][0]);
-                        that.hoverOnState(stateboxes[sID],null,currentBox);
-                        that.hoverOnText(stateboxes[sID],null,this);
+                        that.hoverOnState(stateboxes[sID], null, pathToFill[0][0]);
+                        that.hoverOnState(stateboxes[sID], null, currentBox);
+                        that.hoverOnText(stateboxes[sID], null, this);
                     })
                     .on("mouseout", function(e){
                         var pathToFill,
@@ -239,12 +257,10 @@ $(document).ready(function() {
         // Called whenever hovering over state or statebox
         hoverOnState: function(d,i,element){
             var target;
-            
             if(element) target = element;
             else target = this;
 
-            d3.select(target)
-                .style("fill", "yellow");
+            d3.select(target).style("fill", d3Map.highlightColor);
 
             var stateName = ''; // Required declaration due to IE
 
@@ -252,15 +268,7 @@ $(document).ready(function() {
             else stateName = d.properties.name; // If called by a state, then this is true
 
             $('#stateName').text(stateName);
-            var statePolicy;
-
-            // Really should do this via the legend array instead...
-            switch(d.code){
-                case '1': statePolicy = "Law Only"; break;
-                case '2': statePolicy = "Policy Only"; break;
-                case '3': statePolicy = "Both Law and Policy"; break;
-            }
-
+            statePolicy = d3Map.legend[d.code-1].key;
             $('#stateName').append("<br/>" + statePolicy);
         },
 
@@ -278,24 +286,13 @@ $(document).ready(function() {
         // Called whenever hovering over text within statebox
         hoverOnText: function(d,i,element){
             var target;
-
             if(element) target = element;
             else target = this;
 
-            d3.select(target)
-                .style("fill", "blue")
-                .style("cursor", "hand");
+            d3.select(target).style("fill", d3Map.legend[d.code-1].color);
 
             $('#stateName').text(d.name); // This refers directly to the sBoxes array for a value
-            var statePolicy;
-
-            // Really should do this via the legend array instead...
-            switch(d.code){
-                case '1': statePolicy = "Law Only"; break;
-                case '2': statePolicy = "Policy Only"; break;
-                case '3': statePolicy = "Both Law and Policy"; break;
-            }
-
+            statePolicy = d3Map.legend[d.code-1].key;
             $('#stateName').append("<br/>" + statePolicy);
         },
 
@@ -306,7 +303,7 @@ $(document).ready(function() {
             if(element) target = element;
             else target = this;
             
-            d3.select(target).style("fill","white");
+            d3.select(target).style("fill", d3Map.pathColor);
             $('#stateName').text('');
         },
 
