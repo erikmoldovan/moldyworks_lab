@@ -4452,5 +4452,18 @@
                 ]
             ]
         }
+    },
+    {
+        "type":"Feature",
+        "id":"57",
+        "properties":{
+            "name":"Puerto Rico"
+        },
+        "geometry":{
+            "type":"Polygon",
+            "coordinates":[
+                []
+            ]
+        }
     }
 ]}

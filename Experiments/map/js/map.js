@@ -19,9 +19,11 @@ $(document).ready(function() {
     });
 
     var d3Map = {
-        
+
+        mapWidth:1000,
+        mapHeight:500,
         boxesLeft:830,
-        boxesTop:200,
+        boxesTop:173,
         boxesWidth:48,
         boxesHeight:25,
         boxesXPadding:2,
@@ -29,45 +31,45 @@ $(document).ready(function() {
         JSONresults:null,
         d3Selection:null,
                 
-        stateBoxIDs:["09", "10", "25", "24", "33", "34", "44", "50"],
+        stateBoxIDs:["09", "10", "11", "25", "24", "33", "34", "44", "50", "57"],
         sBoxes:[],
         
-        legend:[{x:830, y:360, key:"Law Only", code:1},
-                {x:830, y:390, key:"Policy Only", code:2},
-                {x:830, y:420, key:"Law & Policy", code:3}],
+        legend:[{x:830, y:360, key:"Law Only", code:1, color:"green"},
+                {x:830, y:390, key:"Policy Only", code:2, color:"red"},
+                {x:830, y:420, key:"Law & Policy", code:3, color:"blue"}],
 
         // Draws the map with the initial values loaded from JSON
         init: function() {
 
             var position, currentState;
-            var map = this;
-            map.d3Selection = d3.select('#mapContainer');
+            var that = this;
+            that.d3Selection = d3.select('#mapContainer');
 
-            var drawMap = map.d3Selection.append('svg')
-                .attr("width", 960)
-                .attr("height", 500);
+            var drawMap = that.d3Selection.append('svg')
+                .attr("width", that.mapWidth)
+                .attr("height", that.mapHeight);
 
              d3.json("data/states_final.json", function(collection) {
-                map.JSONresults = collection.features;
+                that.JSONresults = collection.features;
                 $.each(collection.features, function(){
                     currentState = this;
-                    position = $.inArray(currentState.id, map.stateBoxIDs);
+                    position = $.inArray(currentState.id, that.stateBoxIDs);
                     if(position !== -1){
-                        map.getSBoxesValues(currentState, parseInt(position));
+                        that.getSBoxesValues(currentState, parseInt(position));
                     }
                 })
 
                 drawMap.selectAll(".states")
                     .data(collection.features)
                     .enter().append("path")
-                    .attr("d", d3.geo.path().projection(d3.geo.albersUsa()))
-                    .style("fill", map.fillStates)
-                    .on("click", map.stateClick)
-                    .on("mouseover", map.hoverOnState)
-                    .on("mouseout", map.hoverOutState);
+                    .attr("d", d3.geo.path().projection(d3.geo.albersUsa().scale([1000])))
+                    .style("fill", that.fillStates)
+                    .on("click", that.stateClick)
+                    .on("mouseover", that.hoverOnState)
+                    .on("mouseout", that.hoverOutState);
 
-                map.drawSBoxes(drawMap);
-                map.drawMapKey(drawMap);
+                that.drawSBoxes(drawMap);
+                that.drawMapKey(drawMap);
             });
         },
 
@@ -90,12 +92,13 @@ $(document).ready(function() {
                 currentBox.x = this.boxesLeft + this.boxesWidth + this.boxesXPadding; 
                 currentBox.y = this.boxesTop + ((this.boxesHeight + this.boxesYPadding)*((posID-1)/2))
             }
+
             currentBox.code = code;
             currentBox.url = url;
             currentBox.originID = stateID;
             currentBox.abbrev = abbrev;
             currentBox.name = name;
-            
+
             this.sBoxes.push(currentBox);
         },
 
@@ -103,6 +106,7 @@ $(document).ready(function() {
         drawSBoxes: function(drawMap){
             var that = this,
             stateboxes = this.sBoxes;
+
             drawMap.selectAll(".stateBox")
                 .data(stateboxes)
                 .enter().append("rect")
@@ -117,6 +121,7 @@ $(document).ready(function() {
                     var currentText = $('text')[getNumInDom(this,'rect')];
                     
                     var currentBox = this;
+
                     var pathToFill = that.d3Selection.selectAll('svg path').filter(function(i,d){
                         if(e.originID == i.id)
                             return this;
@@ -211,23 +216,24 @@ $(document).ready(function() {
                     .text(function(index){return index.key});
         },
 
+        /*
+        * If you need to add, or remove stateboxes, modify the subtractive number by 1 and 2 (SID and AID respectively)
+        * This really should be abstracted and based on the number of elements in the JSON array...
+        */
+
         // Assigns ID to Statebox
         fillSID: function(){
-            return ($(this).index()-50); // Easy, if dirty, way to return the position within the sBoxes array
+            return ($(this).index()-52); // Easy, if dirty, way to return the position within the sBoxes array
         },
 
         // Assigns ID to text within Statebox
         fillAID: function(){
-            return ($(this).index()-58); // Easy, if dirty, way to return the position within the sBoxes array
+            return ($(this).index()-62); // Easy, if dirty, way to return the position within the sBoxes array
         },
 
         // Fills in states with appropriate color depending on law/policy status. See legend array for more info.
         fillStates: function(d){
-            if(d.code == 3) return "blue";
-            else if(d.code == 2) return "red";
-            else if(d.code == 1) return "green";
-            
-            return false;
+            return d3Map.legend[d.code-1].color;
         },
 
         // Called whenever hovering over state or statebox
@@ -238,8 +244,7 @@ $(document).ready(function() {
             else target = this;
 
             d3.select(target)
-                .style("fill", "yellow")
-                .style("cursor", "hand");
+                .style("fill", "yellow");
 
             var stateName = ''; // Required declaration due to IE
 
