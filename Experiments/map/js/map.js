@@ -12,7 +12,7 @@ $(document).ready(function() {
         test: Modernizr.svg,
         yep : 'lib/d3.v2.js',
         nope: 'lib/r2d3.v2.js',
-        complete: function() {          
+        complete: function() {
             d3Map.textX  = Modernizr.svg ? 0 : 44;
             d3Map.init();
         }
@@ -20,6 +20,8 @@ $(document).ready(function() {
 
     var d3Map = {
 
+        mapWidth:$('#mapContainer').width(),
+        mapHeight:$('#mapContainer').height(),
         boxesLeft:830,
         boxesTop:173,
         boxesWidth:48,
@@ -69,10 +71,10 @@ $(document).ready(function() {
             that.d3Selection = d3.select('#mapContainer');
 
             var drawMap = that.d3Selection.append('svg')
-                .attr("width", '100%')
-                .attr("height", '100%');
+                .attr("width", that.mapWidth)
+                .attr("height", that.mapHeight);
 
-             d3.json("data/states_final.json", function(collection) {
+            d3.json("data/states_final.json", function(collection) {
                 that.JSONresults = collection.features;
                 $.each(collection.features, function(){
                     currentState = this;
@@ -80,12 +82,12 @@ $(document).ready(function() {
                     if(position !== -1){
                         that.getSBoxesValues(currentState, parseInt(position));
                     }
-                })
-
+                });
                 drawMap.selectAll(".states")
                     .data(collection.features)
                     .enter().append("path")
-                    .attr("d", d3.geo.path().projection(d3.geo.albersUsa().scale([$('#mapContainer').width()])))
+                    .attr("d", d3.geo.path().projection(d3.geo.albersUsa()))
+      //              .attr("d", d3.geo.path().projection(d3.geo.albersUsa().linear().domain([0, 1600]).range([0, that.mapWidth])))
                     .style("fill", that.fillStates)
                     .style("stroke", that.pathColor)
                     .style("stroke-width", that.pathWidth)
@@ -107,7 +109,7 @@ $(document).ready(function() {
             currentBox.originID = originalState.id;
             currentBox.abbrev = originalState.properties.abbrev;
             currentBox.name = originalState.properties.name;
-            
+
             if(posID % 2 == 0){
                 currentBox.x = this.boxesLeft;
                 currentBox.y = this.boxesTop + ((this.boxesHeight + this.boxesYPadding)*(posID/2))
@@ -134,10 +136,10 @@ $(document).ready(function() {
                 .attr("width", that.boxesWidth)
                 .attr("id", that.fillSID)
                 .style("fill", that.fillStates)
-                .on("click", that.stateClick)  
+                .on("click", that.stateClick)
                 .on("mouseover", function(e){
                     var currentText = $('text')[getNumInDom(this,'rect')];
-                    
+
                     var currentBox = this;
 
                     var pathToFill = that.d3Selection.selectAll('svg path').filter(function(i,d){
@@ -214,7 +216,7 @@ $(document).ready(function() {
         drawMapKey: function(drawMap){
             var that = this,
             mapKey = this.legend;
-            
+
             drawMap.selectAll(".keyBlob")
                 .data(mapKey)
                 .enter().append("circle")
@@ -224,7 +226,7 @@ $(document).ready(function() {
                     .attr("height", that.boxesHeight)
                     .attr("width", that.boxesWidth)
                     .style("fill", that.fillStates);
-                    
+
             drawMap.selectAll(".keyText")
                 .data(mapKey)
                 .enter().append("svg:text")
@@ -299,10 +301,10 @@ $(document).ready(function() {
         // Resets text SVG element to original value for display
         hoverOutText: function(d, i, element){
             var target;
-            
+
             if(element) target = element;
             else target = this;
-            
+
             d3.select(target).style("fill", d3Map.pathColor);
             $('#stateName').text('');
         },
