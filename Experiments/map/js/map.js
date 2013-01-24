@@ -28,6 +28,8 @@ $(document).ready(function() {
         boxesHeight:25,
         boxesXPadding:2,
         boxesYPadding:2,
+        boxPosOffset:52,
+        textPosOffset:62,
         JSONresults:null,
         d3Selection:null,
         lawContainer:{key:"Law Only", code:1, color:"green"},
@@ -148,7 +150,7 @@ $(document).ready(function() {
                     });
 
                     var sID = this.id;
-                    if(sID >= 50){sID -= 50}; // Also required by IE
+                    if(sID >= 52){sID -= 52}; // Also required by IE
 
                     that.hoverOnState(stateboxes[sID], null, pathToFill[0][0]); // Fills State
                     that.hoverOnState(stateboxes[sID], null, currentBox); // Fills Box
@@ -190,7 +192,7 @@ $(document).ready(function() {
                         });
 
                         var sID = this.id;
-                        if(sID >= 58){sID -= 58}; // Also required by IE
+                        if(sID >= 62){sID -= 62}; // Also required by IE
 
                         that.hoverOnState(stateboxes[sID], null, pathToFill[0][0]);
                         that.hoverOnState(stateboxes[sID], null, currentBox);

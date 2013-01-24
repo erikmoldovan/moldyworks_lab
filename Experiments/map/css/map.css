@@ -1,9 +1,8 @@
 #pBody {
-
+    width:960px;
 }
 
 #mapContainer {
-    width:960px;
     height: 480px;
 }
 
