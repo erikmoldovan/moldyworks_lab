@@ -1,0 +1,40 @@
+body {
+  margin: 0px;
+  font-family: Helvetica;
+}
+
+#header {
+  font-size: 15px;
+  text-align: center;
+  background-color: #8CC63E;
+  height: 132px;
+  border-bottom: 1px solid #000000;
+  width: 100%;
+  color: #ffffff;
+  text-shadow: 0px 3px 7px rgba(0,0,0,0.7);
+}
+
+#headerText {
+  top: 59px;
+  position: relative;
+}
+
+#menuContainer {
+  width: 190px !important;
+  margin: 0 auto;
+}
+
+#selectList {
+  font-size: 12px;
+  height: 26px;
+  display: block;
+  margin-top: 50px;
+  border-radius: 4px;
+  background: -moz-linear-gradient(top, #fbfbfb 0%, #8e8e8e 100%);  FF3.6+
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fbfbfb), color-stop(100%,#8e8e8e));  Chrome,Safari4+
+  background: -webkit-linear-gradient(top, #fbfbfb 0%,#8e8e8e 100%);  Chrome10+,Safari5.1+
+  background: -o-linear-gradient(top, #fbfbfb 0%,#8e8e8e 100%);  Opera 11.10+
+  background: -ms-linear-gradient(top, #fbfbfb 0%,#8e8e8e 100%);  IE10+
+  background: linear-gradient(to bottom, #fbfbfb 0%,#8e8e8e 100%);  W3C
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fbfbfb', endColorstr='#8e8e8e',GradientType=0 );  IE6-9
+}
