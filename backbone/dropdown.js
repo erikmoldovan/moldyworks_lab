@@ -36,11 +36,21 @@ $(function(){
     model: optModel
   })
   // Instantiate the collection using the Header+Options Model
-  var optList = new optCollection([
+  var optList = new optCollection(
     $.each(feed_obj, function(key, value){
+      console.log(value.optionText);
       new optModel({option_text: value.optionText, header_text: value.headerText, color: value.color});
     })
+  );
+
+  var testList = new optCollection([
+    new optModel({ option_text: 'blah', header_text: 'blah', color: '#000000' }),
+    new optModel({ option_text: 'blah2', header_text: 'blah2', color: '#000000' }),
+    new optModel({ option_text: 'blah3', header_text: 'blah3', color: '#000000' })
   ]);
+
+  console.log(optList);
+  console.log(testList);
 
   /* View to handle HTML rendering */
   var optView = Backbone.View.extend({
@@ -48,7 +58,6 @@ $(function(){
 
     initialize: function(){
       this.listenTo(this.model, 'change', this.render);
-      this.render;
     },
 
     render: function(){
@@ -67,8 +76,6 @@ $(function(){
       this.list = $('#selectList');
 
       // this.listenTo(optList, 'change', this.render);
-
-      console.log(optList);
 
       optList.each(function(option){
         var view = new optView({ model: option});
