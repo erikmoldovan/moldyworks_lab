@@ -7,19 +7,21 @@
   <script src="dropdown.js"></script>
   <link rel="stylesheet" href="style.css"/>
   <title>Erik Moldovan's DropDown</title>
+
+  <script type="text/template" id="list_template">
+    <li id="topItem">Pick one...</li>
+    <% _.each(temp, function(val){ %>
+    <li name="<%= val.headerText %>" value="<%= val.color %>"><%= val.optionText %></li>
+    <% }); %>
+  </script>
 </head>
 <body>
-  <div id="header">
-    <span id="headerText"></span>
+  <div id="headerText">
+    <span>Text chosen from dropdown form.</span>
   </div>
 
-  <div id="menuContainer">
-    <div id="current">
+  <ul id="selectList">
 
-      <div id="toggle"></div>
-    </div>
-
-    <div id="selectList"></div>
-  </div>
+  </ul>
 </body>
 </html>

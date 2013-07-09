@@ -7,62 +7,26 @@
  */
 
 $(function(){
-  // Because jQuery makes my life easier
-  function parseObj(link){
-    var ajaxResponse = {};
-    $.ajax({
-      url: link,
-      async: false,
-      success: function(data){
-        ajaxResponse = data;
-      }
-    });
-    return ajaxResponse.dropdown;
-  }
-  var feedObj = parseObj('dropdown.json');
+  //$(".chzn-select").chosen();
 
   // Model
   var optModel = Backbone.Model.extend({
     // Sets default structure and data for model
     defaults: {
-      optionText: 'Select One...',
-      headerText: 'Text chosen from dropdown form.',
+      optionText: 'Option',
+      headerText: 'Header',
       color: '#000000'
     }
   })
 
   // Collection
   var optCollection = Backbone.Collection.extend({
-    model: optModel // Defines model in use
-  })
-
-  // Instantiate a collection
-  var optList = new optCollection([
-    $.each(feedObj, function(key, value){
-//    new optModel(value);
-      new optModel({optionText: value.optionText, headerText: value.headerText, color: value.color});
-    })
-  ]);
-
-  var optHTML = Backbone.View.extend({
-    id: $('selectList'),
-
-//    events:{
-//      'click': 'toggleHTML'
-//    },
-
-    initialize: function(){
-      this.listenTo(this.model, 'change', this.render);
-    },
-
-    render: function(){
-      this.$el.html('<div id="' + this.model.get('headerText') + '">' + this.model.get('optionText') + '</div>');
-      return this;
+    model: optModel, // Defines model in use
+    url: 'dropdown.json', // URL of collection. In this case, JSON file
+    // Called when Collection makes fetch call. This parses returns the JSON object
+    parse: function(response){
+      return response.dropdown;
     }
-
-//    toggleHTML: function(){
-//      console.log(this);
-//    }
   })
 
   // View
@@ -71,27 +35,29 @@ $(function(){
     el: $('#selectList'),
 
     initialize: function(){
-      this.header = $('#headerText');
-      this.current = $('#current')
-      this.list = $('#selectList');
-
-//      this.listenTo(optList, 'change', this.render);
-
-      console.log('pre optList View loop');
-      console.log(optList);
-
-      optList.each(function(val){
-        var view = new optHTML({model: val });
-        console.log('optList View loop:');
-        console.log(view);
-        this.list.append(view.render().el);
-      }, this);
-
-   },
+      _.bindAll(this); // Binds all underscore events to this view
+      this.collection = new optCollection();
+      this.collection.fetch(); // Calls the collection's parse, getting a JSON object in return
+      this.collection.bind('sync', this.render, this); // Renders the collection on all events to the collection
+    },
 
     render: function(){
+      // This was a painful two hours. At least I understand rendering now
+      var selectors = {"temp": this.collection.toJSON()}; // Creates an object, for simplicity's sake
+      var template = _.template($('#list_template').html()); // Calls the template function template at the selecr provided
+      $(this.el).html(template(selectors)); // And this, this actually adds the html. With jQuery
 
+      return this;
     }
+  });
+
+  // This is the last I could do. I didn't grasp the events system in time to implement this functionality properly
+    $('#selectList').click(function(element){
+      console.log(element.target.textContent);
+      console.log($(element.target));
+      $('#topItem').text(element.target.textContent);
+      $('#headerText span').text(element.target.attributes[0].nodeValue);
+      $('#headerText').css("background-color", element.target.attributes[1].nodeValue);
   });
 
   new optView();
