@@ -1,27 +1,25 @@
 <!DOCTYPE html>
-<html ng-app>
+<html>
 <head>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.0.0/backbone-min.js"></script>
   <script src="dropdown.js"></script>
   <link rel="stylesheet" href="style.css"/>
-  <title>Erik Moldovan's DropDown</title>
-
-  <script type="text/template" id="list_template">
-    <li id="topItem">Pick one...</li>
-    <% _.each(temp, function(val){ %>
-    <li name="<%= val.headerText %>" value="<%= val.color %>"><%= val.optionText %></li>
-    <% }); %>
-  </script>
+  <title>Erik Moldovan's Dropdown</title>
 </head>
 <body>
-  <div id="headerText">
-    <span>Text chosen from dropdown form.</span>
+  <div id="mainApp">
+    <div id="headerText">
+      <span>Text chosen from dropdown form.</span>
+    </div>
+
+    <div class="selectContainer">
+      <div id="currentOption">Pick one...</div>
+      <ul id="selectList">
+
+      </ul>
+    </div>
   </div>
-
-  <ul id="selectList">
-
-  </ul>
 </body>
 </html>

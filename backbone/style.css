@@ -19,14 +19,18 @@ body {
   position: relative;
 }
 
-#selectList {
-  font-size: 12px;
+.selectContainer {
   margin: 0 auto;
   width: 190px !important;
   height: 26px;
   display: block;
   margin-top: 50px;
   border-radius: 4px;
+}
+
+#selectList {
+  font-size: 12px;
+  display: block;
   list-style: none;
 /*  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fbfbfb), color-stop(100%,#8e8e8e));  Chrome,Safari4+
   background: -webkit-linear-gradient(top, #fbfbfb 0%,#8e8e8e 100%);  Chrome10+,Safari5.1+
@@ -41,6 +45,6 @@ body {
   background: grey;
 }
 
-li#topItem {
+#currentOption {
   background: red;
 }
