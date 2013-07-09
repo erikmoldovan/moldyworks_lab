@@ -52,7 +52,7 @@ $(function(){
     },
 
     render: function(){
-      this.$el.html('<div name=' + this.model.get('header_text') + ' color=' + this.model.get('color') + '>' + this.model.get('option_text') + '</div>');
+      this.$el.html('<div>' + this.model.get('option_text') + '</div>');
       return this;
     }
   })
