@@ -109,6 +109,7 @@ $(function(){
         $(headerText).text(elem.get('headerText'));
       })
 
+
       console.log(this.currentIndex);
     },
 
