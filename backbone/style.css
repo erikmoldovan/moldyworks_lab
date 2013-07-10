@@ -3,7 +3,7 @@ body {
   font-family: Helvetica;
 }
 
-#headerText {
+#headerBox {
   font-size: 15px;
   text-align: center;
   background-color: #8CC63E;
@@ -14,7 +14,7 @@ body {
   text-shadow: 0px 3px 7px rgba(0,0,0,0.7);
 }
 
-#headerText span {
+#headerText {
   top: 59px;
   position: relative;
 }
