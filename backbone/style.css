@@ -26,25 +26,30 @@ body {
   display: block;
   margin-top: 50px;
   border-radius: 4px;
-}
-
-#selectList {
-  font-size: 12px;
-  display: block;
-  list-style: none;
-/*  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fbfbfb), color-stop(100%,#8e8e8e));  Chrome,Safari4+
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fbfbfb), color-stop(100%,#8e8e8e));  Chrome,Safari4+
   background: -webkit-linear-gradient(top, #fbfbfb 0%,#8e8e8e 100%);  Chrome10+,Safari5.1+
   background: -moz-linear-gradient(top, #fbfbfb 0%, #8e8e8e 100%);  FF3.6+
   background: -o-linear-gradient(top, #fbfbfb 0%,#8e8e8e 100%);  Opera 11.10+
   background: -ms-linear-gradient(top, #fbfbfb 0%,#8e8e8e 100%);  IE10+
   background: linear-gradient(to bottom, #fbfbfb 0%,#8e8e8e 100%);  W3C
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fbfbfb', endColorstr='#8e8e8e',GradientType=0 );  IE6-9
-*/}
+}
+
+#selectList {
+  font-size: 12px;
+  display: none;
+  list-style: none;
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
+  -webkit-padding-start: 0;
+}
 
 #selectList li {
   background: grey;
 }
 
 #currentOption {
-  background: red;
+  text-align: center;
+  height: 100%;
+  padding-top: 5px;
 }

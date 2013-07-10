@@ -5,6 +5,7 @@
  * Time: 11:15 PM
  * To change this template use File | Settings | File Templates.
  */
+
 $(function(){
   /* JSON Parser function */
   function parseObj(link){
@@ -12,9 +13,7 @@ $(function(){
     $.ajax({
       url: link,
       async: false,
-      success: function(data){
-        ajaxResponse = data;
-      }
+      success: function(data){ ajaxResponse = data; }
     });
     return ajaxResponse.dropdown;
   }
@@ -24,8 +23,8 @@ $(function(){
   /* Model for Header + Options list */
   var optModel = Backbone.Model.extend({
     defaults: {
-      option_text: 'Option',
-      header_text: 'Header',
+      optionText: 'Option',
+      headerText: 'Header',
       color: '#000000',
       current: false
     }
@@ -38,19 +37,13 @@ $(function(){
   // Instantiate the collection using the Header+Options Model
   var optList = new optCollection(
     $.each(feed_obj, function(key, value){
-      console.log(value.optionText);
-      new optModel({option_text: value.optionText, header_text: value.headerText, color: value.color});
+      new optModel({
+        optionText: value.optionText,
+        headerText: value.headerText,
+        color: value.color
+      });
     })
   );
-
-  var testList = new optCollection([
-    new optModel({ option_text: 'blah', header_text: 'blah', color: '#000000' }),
-    new optModel({ option_text: 'blah2', header_text: 'blah2', color: '#000000' }),
-    new optModel({ option_text: 'blah3', header_text: 'blah3', color: '#000000' })
-  ]);
-
-  console.log(optList);
-  console.log(testList);
 
   /* View to handle HTML rendering */
   var optView = Backbone.View.extend({
@@ -61,7 +54,7 @@ $(function(){
     },
 
     render: function(){
-      this.$el.html('<div>' + this.model.get('option_text') + '</div>');
+      this.$el.html('<div>' + this.model.get('optionText') + '</div>');
       return this;
     }
   })
@@ -71,19 +64,19 @@ $(function(){
     el: $('.selectContainer'),
 
     initialize: function(){
-      // this.header = $('#headerText');
-      // this.current = $('#currentOption');
       this.list = $('#selectList');
-
-      // this.listenTo(optList, 'change', this.render);
+      // this.currentOption = $('#currentOption');
 
       optList.each(function(option){
         var view = new optView({ model: option});
         this.list.append(view.render().el);
       }, this);
+
+      // this.listenTo(optList, 'click', this.render);
     },
 
     render: function(){
+      console.log('boogity');
       // var current = {};
 
       // _.each(optList.getCurrent(), function(elem){
@@ -94,34 +87,14 @@ $(function(){
     }
   })
 
-/*  // View
-  var optView = Backbone.View.extend({
-    // Scope of the view; the base element
-    el: $('#selectList'),
-
-    initialize: function(){
-      _.bindAll(this); // Binds all underscore events to this view
-      this.collection = new optCollection();
-      this.collection.fetch(); // Calls the collection's parse, getting a JSON object in return
-      this.collection.bind('sync', this.render, this); // Renders the collection on all events to the collection
-    },
-
-    render: function(){
-      // This was a painful two hours. At least I understand rendering now
-      var selectors = {"temp": this.collection.toJSON()}; // Creates an object, for simplicity's sake
-      var template = _.template($('#list_template').html()); // Calls the template function template at the selecr provided
-      $(this.el).html(template(selectors)); // And this, this actually adds the html. With jQuery
-
-      return this;
+  $('#currentOption').click(function(){
+    var list = $('#selectList');
+    if(list.is(':visible')){
+      list.hide();
+    }else{
+      list.show();
     }
-  });*/
-
-  // This is the last I could do. I didn't grasp the events system in time to implement this functionality properly
-/*  $('#selectList').click(function(element){
-    $('#topItem').text(element.target.textContent);
-    $('#headerText span').text(element.target.attributes[0].nodeValue);
-    $('#headerText').css("background-color", element.target.attributes[1].nodeValue);
-  });*/
+  });
 
   new App();
 });
