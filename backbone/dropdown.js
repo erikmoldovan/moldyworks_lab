@@ -29,18 +29,14 @@ $(function(){
       current: false
     },
 
-    toggle: function(){
-      this.set('current', !this.get('current'));
-    }
+    toggle: function(flag){ this.set('current', flag); }
   })
 
   /* Collection template for optModel */
   var optCollection = Backbone.Collection.extend({
     model: optModel,
 
-    getCurrent: function(){
-      return this.where({ current: true });
-    }
+    getCurrent: function(){ return this.where({ current: true }); }
   })
   // Instantiate the collection using the Header+Options Model
   var optList = new optCollection(
@@ -57,13 +53,9 @@ $(function(){
   var optView = Backbone.View.extend({
     tagName: 'li',
 
-    events: {
-      'click': 'switchCurrent'
-    },
+    events: { 'click': 'switchCurrent' },
 
-    initialize: function(){
-      this.listenTo(this.model, 'change', this.render);
-    },
+    initialize: function(){ this.listenTo(this.model, 'change', this.render); },
 
     render: function(){
       this.$el.html('<div>' + this.model.get('optionText') + '</div>');
@@ -71,7 +63,12 @@ $(function(){
     },
 
     switchCurrent: function(){
-      this.model.toggle();
+      var currentPos = optList.indexOf(this.model);
+
+      for(i = 0; i < optList.length; i++){
+        if(i == currentPos){ this.model.toggle(true); }
+        else{ optList.models[i].toggle(false); }
+      }
     }
   })
 
@@ -79,11 +76,7 @@ $(function(){
   var App = Backbone.View.extend({
     el: $('.selectContainer'),
 
-    currentIndex: -1,
-
-    events: {
-      'click': 'dropdown'
-    },
+    events: { 'click': 'dropdown' },
 
     initialize: function(){
       this.list = $('#selectList');
@@ -103,23 +96,17 @@ $(function(){
       this.headerText = $('#headerText');
 
       _.each(optList.getCurrent(), function(elem, index){
-        that.currentIndex = index;
         $(currentOption).text(elem.get('optionText'));
-        $(headerBox).css({ 'background-color' : elem.get('color')});
+        $(headerBox).css({ 'background-color' : elem.get('color') });
         $(headerText).text(elem.get('headerText'));
       })
-
-
-      console.log(this.currentIndex);
     },
 
     dropdown: function(){
       var list = $('#selectList');
-      if(list.is(':visible')){
-        list.hide();
-      }else{
-        list.show();
-      }
+
+      if(list.is(':visible')){ list.hide(); }
+      else{ list.show(); }
     }
   })
 
