@@ -1,5 +1,0 @@
-Instructions
-
-- Create a custom dropdown that is built based on the JSON file included.
-- There are 3 attributes within each item in the dropdown array: "optionText", "headerText" & "color".
-- Upon selecting an item from the dropdown, it should update the inner text and background color of the header.
