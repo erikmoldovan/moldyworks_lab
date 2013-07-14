@@ -9,13 +9,14 @@
 $(function(){
   /* JSON Parser function */
   function parseObj(link){
-    var ajaxResponse = {};
+    var json = {};
     $.ajax({
       url: link,
       async: false,
-      success: function(data){ ajaxResponse = data; }
+      success: function(data){ json = data.dropdown; }
     });
-    return ajaxResponse.dropdown;
+
+    return json;
   }
   // Call it!
   var feed_obj = parseObj('dropdown.json');
