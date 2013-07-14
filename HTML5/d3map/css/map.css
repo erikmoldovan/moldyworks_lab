@@ -1,0 +1,18 @@
+#pBody {
+    width:960px;
+}
+
+#mapContainer {
+    height: 480px;
+}
+
+path, rect, text {
+    cursor: pointer;
+}
+
+#stateName {
+    top: 4px;
+    height:24px;
+    font-size: 24px;;
+    text-align: center;
+}

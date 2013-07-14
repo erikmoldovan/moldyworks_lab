@@ -1,0 +1,107 @@
+@font-face
+{
+    font-family:"digital7";
+    src: url('Digital-7Mono.woff');
+}
+
+#calcBody {
+    border: 3px solid black;
+    border-radius: 10px;
+    height: 450px;
+    width: 260px;
+    background-color: #CCCCCC;
+    background-image:-webkit-linear-gradient(-53deg,rgba(255, 255, 255, .3) 0% , rgba(255, 255, 255, .5) 50% , transparent 98%, transparent 100% ),-webkit-linear-gradient(#DDD 0%, #AAA 90%);
+    -moz-box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.5);
+    box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.5);
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#displayField {
+    border: 3px solid black;
+    border-radius: 10px;
+    height: 60px;
+    margin: 10px;
+    background-color: #A2E876;
+    -moz-box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.5) inset;
+    -webkit-box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.5) inset;
+    box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.5) inset;
+}
+
+#mainDisplay {
+    font-size: 48px;
+    padding: 8px;
+    text-align:right;
+    font-family:"digital7";
+}
+
+#displayOverflow{
+    font-size: 12px;
+    font-family:"digital7";
+    text-align: right;
+    position:absolute;
+    top:61px;
+    left:224px;
+}
+
+#buttonDrawArea {
+    position: relative;
+    left: 2px;
+    margin: 10px;
+}
+
+.btns {
+    text-align: center;
+    padding: 10.5px 0;
+    border: 2px inset black;
+    border-radius: 10px;
+    height: 25px;
+    width: 45px;
+    display: block;
+    float: left;
+    margin: 5px;
+    font-weight: 900;
+    font-size: 24px;
+    background: #BDBDBD;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#D4D4D4), to(#BDBDBD));
+    -moz-box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.2), 0px 0px 0px 1px rgba(170, 168, 169, 1);
+    -webkit-box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.2), 0px 0px 0px 1px rgba(170, 168, 169, 1);
+    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.2), 0px 0px 0px 1px rgba(170, 168, 169, 1);
+}
+
+a{
+    background:black;
+    padding:1px;
+}
+
+a:active .btns {
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#CECECE), to(#D4D4D4));
+}
+
+.btns:hover {
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#ECECEC), to(#C4C4C4));
+}
+
+.btns span {
+    width: 0px;
+    height: 0px;
+}
+
+#buttonequals {
+    height: 84px;
+}
+
+#button0 {
+    position: relative;
+    top: -60px;
+    width: 105px;
+}
+
+#buttondecimal {
+    position: relative;
+    top: -60px;
+}
