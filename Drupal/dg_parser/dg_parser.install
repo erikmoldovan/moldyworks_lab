@@ -1,0 +1,10 @@
+/**
+ * dg_parser.install
+ */
+
+/**
+ * Check if the Artist, Album and Tracks content types exist.
+ */
+function dg_parser_install(){
+
+}

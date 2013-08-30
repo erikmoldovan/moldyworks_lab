@@ -1,0 +1,81 @@
+<?php
+/**
+ * Discography Generator - Parser Module
+ * Authored by Erik Moldovan of DOOR3
+ * Date 051613
+ * v0.2
+ *
+ * Files:
+ *
+ * dg.sanity.inc: Checks that required modules exist. Also initializes the site with the required content types and views
+ * dg.importer.inc: Handles actual parsing logic, accessing Spotify's JSON API for the raw data.
+ */
+
+include_once 'dg_parser.importer.inc';
+
+/**
+ * I get by with a little help from my friends
+ *
+ * @param string $path
+ */
+function dg_parser_help($path, $args) {
+  switch ($path) {
+    case "admin/help#discography_parser":
+      return '<p>' . t("Parses the discography of a selected artist from Spotify using their JSON API. This should only be run when the artist or discography needs to be changed or updated.") . '</p>';
+      break;
+  }
+}
+
+/**
+ * Menu entry to access the Admin pages easily
+ *
+ * @return $items
+ */
+function dg_parser_menu(){
+  $items = array();
+  $items['admin/settings/discography_parser'] = array(
+    'title' => 'Discography Parser',
+    'description' => 'Sets Artist, Album and Song IDs for parsing',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('discography_parser_admin'),
+    'access arguments' => array('administer discography_parser settings'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+
+  return $items;
+}
+
+/**
+ * The Administration page for the module, which just takes in the name of an artist
+ *
+ * @return $form
+ */
+function dg_parser_admin(){
+  // The single field for the configuration page
+  $form = array();
+  $form['discography_parser_artist_name'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Artist Name'),
+    '#default_value' => variable_get('discography_parser_artist_name', 0),
+    '#size' => 40,
+    '#maxlength' => 255,
+    '#description' => t("The name of the artist"),
+    '#required' => TRUE,
+  );
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'Submit',
+  );
+
+  return $form;
+}
+
+/**
+ * Simply passes on the submitted artist name to the Director function
+ *
+ * @param array $form_state
+ */
+function dg_parser_admin_submit($form, &$form_state){
+  $artist_name = rawurlencode($form_state['values']['discography_parser_artist_name']);
+  discography_parser_retrieve_artist($artist_name);
+}

@@ -1,0 +1,106 @@
+<?php
+
+/**
+ * Implements hook_menu
+ */
+function d3map_menu() {
+
+  $items = array();
+
+  $items['anti-bullying-law-map'] = array(
+    'title' => 'D3Map',
+    'page callback' => 'd3map_map',
+    'access callback' => TRUE,
+  );
+  $items['admin/d3map'] = array(
+    'title' => 'Configure D3Map',
+    'description' => 'Adjust D3Map Settings.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('d3map_admin_settings'),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'd3map.admin.inc',
+  );
+
+  return $items;
+}
+
+function d3map_theme() {
+  return array(
+    'wwe_bullying_map' => array(
+      'render element' => 'map',
+      'template' => 'd3map',
+    ),
+  );
+}
+
+/**
+ * Implements hook_block_info
+ *
+ * We're including this as a block so it can easily be attached to a page
+ * containing normal node content below the map. This could just be a simple
+ * page, but it'd be harder to customize the rest of the content around it.
+ */
+function d3map_block_info() {
+  $blocks = array();
+  $blocks['map'] = array(
+    'info' => t('D3Map'),
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view
+ */
+function d3map_block_view($delta) {
+  $block = array();
+
+  switch ($delta) {
+    case 'map':
+      $block['subject'] = t('D3Map');
+      $block['content'] = d3map_map();
+      break;
+  }
+
+  return $block;
+}
+
+/**
+ * Generate the map.  Acts as the page callback and is called by the block.
+ */
+function d3map_map() {
+  // Only call this once and reuse.
+  $path = drupal_get_path('module', 'd3map');
+
+  $js_settings = array(
+    'dataPath' => '/' . $path . '/',
+    'lawColor' => variable_get('d3map_' . 'lawColor', "green"),
+    'policyColor' => variable_get('d3map_' . 'policyColor', "red"),
+    'lawPolicyColor' => variable_get('d3map_' . 'lawPolicyColor', "blue"),
+    'hiliteColor' => variable_get('d3map_' . 'hiliteColor', "yellow"),
+    'pathColor' => variable_get('d3map_' . 'pathColor', 'white'),
+  );
+
+  $output = array(
+    '#theme' => 'd3map',
+    // Use #attached property to ensure files are included when caching is on.
+    '#attached' => array(
+      'css' => array(
+        $path . '/css/map.css',
+      ),
+     // 'library'
+      'js' => array(
+        $path . '/js/map.js',
+        $path . '/lib/modernizr.custom.70505.js',
+        array(
+          'data' => array('d3Map' => $js_settings),
+          'type' => 'setting'
+        ),
+      ),
+    ),
+  );
+
+  return $output;
+}
+
+

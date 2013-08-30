@@ -1,0 +1,23 @@
+#mapContainer {
+    height: auto;
+    width:100%;
+}
+#mapSVG{
+    width:100%;
+}
+path, rect, text {
+    cursor: pointer;
+}
+
+#stateInfo{
+    top: 4px;
+    height:24px;
+    text-align: center;
+    margin:0 auto;
+}
+.stateName{
+    font-size: 24px;
+}
+.stateInfo{
+    font-size:18px;
+}

@@ -1,0 +1,4 @@
+name = Parser
+description = Parses the discography of a selected artist from Spotify using their JSON API.
+core = 7.x
+package = Discography Generator
