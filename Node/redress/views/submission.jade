@@ -1,0 +1,16 @@
+extends layout
+
+block submission
+	#posts_container
+		ul#posts_list
+		form#search_posts
+			input(type="text", name="search_posts")
+			input(type="checkbox", name="just_top", checked="checked")
+			Single Result?
+			input(type="submit", value="Search")
+		form#new_post_form
+			input(type="text", name="new_post")
+			input(type="submit", value="Post")
+		form#remove_posts
+			input(type="text", name="remove_posts")
+			input(type="submit", value="Remove")
