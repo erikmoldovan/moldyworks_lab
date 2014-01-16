@@ -1,0 +1,99 @@
+/*** Generic Circle creation styles ***/
+.challenge1 .code div,
+.challenge2 .code div,
+.challenge3 .code div {
+	width: 100px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	text-align: center;
+	padding: 40px 0px;
+	border-radius: 100%;
+	color: rgb(224,224,224);
+	display: inline-block;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	font-family: "Helvetica Neue", sans-serif;
+	font-size: 14px;
+}
+
+.challenge1 .code div:nth-child(3n+1),
+.challenge2 .code div:nth-child(3n+1),
+.challenge3 .code div:nth-child(3n+1) {
+	background: #545454;
+	background: radial-gradient(circle, #7f7f7f, #545454 60%);
+	float: left;
+}
+
+.challenge1 .code div:nth-child(3n+2),
+.challenge2 .code div:nth-child(3n+2),
+.challenge3 .code div:nth-child(3n+2) {
+	background: #481654;
+	background: radial-gradient(circle, #6e267f, #481654 60%);
+	padding-left: 3px;
+	padding-right: 3px;
+}
+
+.challenge1 .code div:nth-child(3n+3),
+.challenge2 .code div:nth-child(3n+3),
+.challenge3 .code div:nth-child(3n+3) {
+	background: #294f00;
+	background: radial-gradient(circle, #427800, #294f00 60%);
+	float: right;
+}
+
+/*** Challenge level code ***/
+/* Challenge #1 */
+.challenge1 .code {
+	width: 300px;
+	border-left: 1px solid #adadad; /* I'm pretty sure this border is just a fluke in the image */
+}
+
+/* Challenge #2 */
+.challenge2 .code,
+.challenge3 .code {
+	width: 884px;
+	border-right: 1px solid #e4e4e4; /* I'm pretty sure this border is just a fluke in the image */
+}
+
+.challenge2 .code div:nth-child(6n+2),
+.challenge3 .code div:nth-child(6n+2) {
+	margin-left: 136px;
+}
+
+/* Challenge #3 */
+.challenge3 .code div:nth-child(6n+1):hover,
+.challenge3 .code div:nth-child(6n+4):hover {
+	color: red;
+}
+
+.challenge3 .code div:nth-child(6n+3):hover,
+.challenge3 .code div:nth-child(6n+6):hover {
+	background: blue;
+}
+
+.challenge3 .code div:nth-child(6n+2):hover {
+	animation-name: slide;
+	animation-duration: 2s;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+	-webkit-animation-name: slide;
+	-webkit-animation-duration: 2s;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-direction: alternate;
+}
+
+@keyframes slide {
+	0%		{margin-left: 136px;}
+	100%	{margin-left: 0px;}
+}
+
+@-webkit-keyframes slide {
+	0%		{margin-left: 136px;}
+	100%	{margin-left: 0px;}
+}
+
+.challenge3 .code div:nth-child(6n+2):active {
+	animation-play-state: paused;
+	-webkit-animation-play-state: paused;
+}

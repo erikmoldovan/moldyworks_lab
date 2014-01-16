@@ -306,7 +306,7 @@ function init(){
         },
 
         numBtns:document.getElementsByClassName('numBtn'),
-        outputDisplay:document.getElementById('displayArea'),
+        outputDisplay:document.getElementById('displayField'),
         outputOverflow:document.getElementById('displayOverflow')});
 
     $('div#calcBody').draggable({cancel:"a"});

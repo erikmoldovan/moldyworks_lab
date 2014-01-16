@@ -1,0 +1,23 @@
+<html>
+	<head>
+		<script src="index.js"></script>
+	</head>
+	<body>
+		<form name="parse">
+			Enter a list of numbers, comma delimited: <input type="text" name="nums"></input>
+			<input type="button" value="Submit" onClick="parseInput()"/>
+		</form>
+
+		<form name="generate">
+			<p>Or you can have use auto-generate an array</p>
+			<p>How many numbers do you want? <input type="text" name="length"/></p>
+			<p>What should the max number be? <input type="text" name="max"/></p>
+			<input type="button" value="Submit" onClick="generateNums()"/>
+		</form>
+
+		<div>
+			<p>Here are the starting indices for runs of three consecutive numbers:</p>
+			<div id="results"></div>
+		</div>
+	</body>
+</html>
